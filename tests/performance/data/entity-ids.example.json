@@ -1,0 +1,9 @@
+{
+  "_comment": "Plantilla del pool de IDs que consumen los escenarios de k6. Genera el archivo real data/entity-ids.json con scripts/collect-entity-ids.mjs tras sembrar el volumen de datos (Diseño §3.4). No se versiona entity-ids.json porque los IDs son específicos de cada siembra.",
+  "accounts": ["cly000000000000000000acc1", "cly000000000000000000acc2"],
+  "contacts": ["cly000000000000000000ct01", "cly000000000000000000ct02"],
+  "leads": ["cly000000000000000000ld01"],
+  "opportunities": ["cly000000000000000000op01", "cly000000000000000000op02"],
+  "contracts": ["cly000000000000000000cn01"],
+  "targets": ["cly000000000000000000tg01", "cly000000000000000000tg02"]
+}
