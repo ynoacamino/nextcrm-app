@@ -1,0 +1,44 @@
+# Stack de observabilidad para las pruebas de rendimiento (Plan §5.6.2 / Diseño §3.2).
+#
+# Prometheus recibe las métricas de k6 vía remote write y Grafana las visualiza.
+# Ejecutar los scripts con la salida experimental de Prometheus:
+#
+#   K6_PROMETHEUS_RW_SERVER_URL=http://localhost:9090/api/v1/write \
+#   k6 run -o experimental-prometheus-rw tests/performance/scenarios/load/accounts-list.load.js
+#
+# Levantar el stack:
+#   docker compose -f tests/performance/monitoring/docker-compose.k6.yml up -d
+#
+# Grafana: http://localhost:3001 (admin/admin) — importar el dashboard oficial de
+# k6 Prometheus (ID 19665) o el propio del equipo.
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.enable-remote-write-receiver # necesario para el remote write de k6
+      - --enable-feature=native-histograms
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+volumes:
+  prometheus-data:
+  grafana-data:

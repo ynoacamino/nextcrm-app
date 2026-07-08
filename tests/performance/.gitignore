@@ -1,0 +1,5 @@
+# Pool de IDs específico de cada siembra (generado por scripts/collect-entity-ids.mjs).
+data/entity-ids.json
+
+# Reportes de ejecución generados por handleSummary.
+reports/*.json

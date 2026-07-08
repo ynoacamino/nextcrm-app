@@ -1,0 +1,22 @@
+# Configuración mínima de Prometheus para recibir métricas de k6 (remote write)
+# y opcionalmente hacer scraping de exporters de infraestructura (Diseño §4.4).
+
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  # Prometheus se auto-monitorea.
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # Métricas de infraestructura (opcional): habilitar node_exporter y
+  # postgres_exporter para correlacionar CPU/memoria/conexiones de PostgreSQL
+  # con las ventanas de ejecución de las pruebas (PRSTRESS-011/012/013, PRSOAK-*).
+  # - job_name: node
+  #   static_configs:
+  #     - targets: ["node-exporter:9100"]
+  # - job_name: postgres
+  #   static_configs:
+  #     - targets: ["postgres-exporter:9187"]
