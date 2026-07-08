@@ -1,0 +1,58 @@
+// PRSTRESS — Oportunidades: saturación de listado y de creación.
+//
+// META:
+//   cases:    PRSTRESS-004, PRSTRESS-010
+//   endpoint: GET /crm/opportunities (getOpportunity) + Server Action createOpportunity
+//   objetivo: punto de saturación del listado por etapa (10 → 150 VU) y
+//             degradación del tiempo de respuesta de creación de oportunidades.
+//   umbral:   lectura STRESS p95 < 2s; escritura STRESS p95 < 2.5s (Diseño §4.3)
+//   carga:    rampa 10 → 150 VU, 15 min
+//   requiere: pool de accounts en data/entity-ids.json (clave "accounts").
+
+import { group, sleep } from "k6";
+import { ROUTES } from "../../config/environment.js";
+import { stress } from "../../config/scenarios.js";
+import { PRESETS, buildThresholds } from "../../config/thresholds.js";
+import { authenticate } from "../../lib/auth.js";
+import { readPage, invokeServerAction } from "../../lib/client.js";
+import { record, makeHandleSummary } from "../../lib/metrics.js";
+import { idPool, pick, newOpportunityArgs } from "../../lib/data.js";
+
+const accounts = idPool("accounts");
+
+export const options = {
+  scenarios: { opportunities_stress: stress(10, 150, 15) },
+  thresholds: buildThresholds({ read: PRESETS.stressRead, write: PRESETS.stressWrite }),
+};
+
+export function setup() {
+  const cookie = authenticate();
+  return { cookie };
+}
+
+export default function (data) {
+  const read = { op: "read", suite: "PRSTRESS", entity: "opportunities" };
+  const write = { op: "write", suite: "PRSTRESS", entity: "opportunities" };
+
+  group("PRSTRESS-004 listado de oportunidades bajo saturación", () => {
+    record(readPage(ROUTES.opportunities, data.cookie, read, "?stage=PROPOSAL"), "read");
+  });
+
+  group("PRSTRESS-010 creación de oportunidad (degradación)", () => {
+    const accountId = pick(accounts);
+    record(
+      invokeServerAction(
+        "createOpportunity",
+        ROUTES.opportunities,
+        newOpportunityArgs(accountId),
+        data.cookie,
+        write,
+      ),
+      "write",
+    );
+  });
+
+  sleep(0.5);
+}
+
+export const handleSummary = makeHandleSummary("PRSTRESS-opportunities");
