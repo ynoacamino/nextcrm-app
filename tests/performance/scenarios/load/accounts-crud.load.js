@@ -1,15 +1,4 @@
-// PRLOAD — Cuentas: creación, actualización y detalle (escritura + lectura).
-//
-// META:
-//   cases:    PRLOAD-018, PRLOAD-019, PRLOAD-022
-//   endpoint: Server Action createAccount / updateAccount + GET /crm/accounts/:id
-//   objetivo: tiempo de respuesta de creación y actualización de cuenta y del
-//             renderizado de la página de detalle (getAccountById +
-//             getActivitiesByEntity).
-//   umbral:   escritura LOAD p95 < 800ms; lectura LOAD p95 < 500ms
-//   carga:    20 VU, 10 min
-//   requiere: pool de accounts en data/entity-ids.json (clave "accounts") para
-//             update/detalle.
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

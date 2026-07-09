@@ -9,6 +9,7 @@ node_modules
 .vscode
 .idea
 tests
+!tests/performance
 e2e
 playwright-report
 test-results

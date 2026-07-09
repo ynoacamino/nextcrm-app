@@ -1,31 +1,23 @@
 #!/usr/bin/env bash
-# Ejecuta una familia de escenarios de rendimiento en el orden del Diseño §4.1
-# (LOAD -> STRESS -> SPIKE -> SOAK). No paraleliza suites sobre el mismo entorno
-# (Diseño §3.4.3).
-#
-# Uso:
-#   tests/performance/scripts/run-suite.sh load      # todos los LOAD
-#   tests/performance/scripts/run-suite.sh stress
-#   tests/performance/scripts/run-suite.sh spike
-#   tests/performance/scripts/run-suite.sh soak
-#   tests/performance/scripts/run-suite.sh smoke     # humo rápido (DURATION_SCALE=0.05)
-#
-# Variables útiles (se pasan a k6):
-#   BASE_URL, LOCALE, ADMIN_EMAIL, SESSION_COOKIE, DURATION_SCALE, TARGET_RPS,
-#   AID_<accion> (Next-Action IDs). Ver README.md.
+
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPORTS="${REPORTS_DIR:-$HERE/reports}"
 SUITE="${1:-load}"
 shift || true
 
+mkdir -p "$REPORTS"
+
 k6_run() {
   local f="$1"
+  local name
+  name="$(basename "$f" | sed 's/\.[^.]*$//')"
   shift
   echo "════════════════════════════════════════════════════════════"
   echo "▶ k6 run $(basename "$f")"
   echo "════════════════════════════════════════════════════════════"
-  ( cd "$HERE" && k6 run "$@" "$f" )
+  ( cd "$HERE" && k6 run --summary-export="$REPORTS/$name.json" --out csv="$REPORTS/$name-raw-metrics.csv" "$@" "$f" )
 }
 
 case "$SUITE" in

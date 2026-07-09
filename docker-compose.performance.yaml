@@ -1,0 +1,125 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nextcrm
+      POSTGRES_PASSWORD: nextcrm_dev
+      POSTGRES_DB: nextcrm
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - nextcrm
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nextcrm"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: nextcrm
+      MINIO_ROOT_PASSWORD: minio_dev_password
+    volumes:
+      - minio_data:/data
+    networks:
+      - nextcrm
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+  inngest:
+    image: inngest/inngest:latest
+    restart: unless-stopped
+    command: inngest dev -u http://app:3001/api/inngest
+    networks:
+      - nextcrm
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8288/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "8288:8288"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.performance
+    restart: unless-stopped
+    env_file:
+      - .env.docker.test
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      inngest:
+        condition: service_started
+    networks:
+      - nextcrm
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  performance-tester:
+    build:
+      context: .
+      dockerfile: Dockerfile.performance
+    user: root
+    env_file:
+      - .env.docker.test
+    environment:
+      BASE_URL: http://app:3001
+      DURATION_SCALE: "1"
+      REPORTS_DIR: /app/tests/performance/reports
+    depends_on:
+      app:
+        condition: service_healthy
+    networks:
+      - nextcrm
+    volumes:
+      - ./perf-reports:/app/tests/performance/reports
+      - ./perf-charts:/app/tests/performance/docs/img
+    entrypoint: >
+      /bin/bash -c "
+      until curl -s -f http://app:3001/ > /dev/null; do sleep 5; done;
+      node tests/performance/scripts/collect-action-ids.mjs;
+      node tests/performance/scripts/collect-entity-ids.mjs;
+      for suite in smoke load stress spike soak; do
+        echo \"▶ $$suite\";
+        bash tests/performance/scripts/run-suite.sh \"$$suite\";
+      done;
+      echo '=== Done ===';
+      ls /app/tests/performance/reports/;
+      "
+
+  data-exporter:
+    image: alpine:3.19
+    command: sleep infinity
+    volumes:
+      - ./perf-reports:/data/reports
+      - ./perf-charts:/data/charts
+
+volumes:
+  postgres_data:
+  minio_data:
+
+networks:
+  nextcrm:
+    driver: bridge

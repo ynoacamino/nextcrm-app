@@ -1,14 +1,4 @@
-// PRLOAD — Actividades: creación con vínculos (escritura) y listado por entidad.
-//
-// META:
-//   cases:    PRLOAD-013, PRLOAD-014
-//   endpoint: Server Action createActivity + getActivitiesByEntity
-//   objetivo: tiempo de respuesta de la creación de actividad con vínculos
-//             múltiples (varias inserciones) y del listado de actividades por
-//             entidad bajo carga normal.
-//   umbral:   escritura LOAD p95 < 800ms; lectura LOAD p95 < 500ms
-//   carga:    30 VU, 10 min
-//   requiere: pool de accounts en data/entity-ids.json (clave "accounts").
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

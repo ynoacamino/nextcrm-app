@@ -24,7 +24,16 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
-    "test:server": "dotenv -e .env.test -- pnpm prisma migrate deploy && dotenv -e .env.test -- pnpm prisma db seed && dotenv -e .env.test -- pnpm build && dotenv -e .env.test -- pnpm start"
+    "test:server": "dotenv -e .env.test -- pnpm prisma migrate deploy && dotenv -e .env.test -- pnpm prisma db seed && dotenv -e .env.test -- pnpm build && dotenv -e .env.test -- pnpm start",
+    "test:perf:collect-actions": "node tests/performance/scripts/collect-action-ids.mjs",
+    "test:perf:collect-entities": "node tests/performance/scripts/collect-entity-ids.mjs",
+    "test:perf:run": "bash tests/performance/scripts/run-suite.sh",
+    "test:perf:smoke": "bash tests/performance/scripts/run-suite.sh smoke",
+    "test:perf:load": "bash tests/performance/scripts/run-suite.sh load",
+    "test:perf:stress": "bash tests/performance/scripts/run-suite.sh stress",
+    "test:perf:spike": "bash tests/performance/scripts/run-suite.sh spike",
+    "test:perf:soak": "bash tests/performance/scripts/run-suite.sh soak",
+    "test:perf:charts": "python3 tests/performance/scripts/perf-charts.py -i tests/performance/reports -o tests/performance/docs/img"
   },
   "prisma": {
     "seed": "ts-node ./prisma/seeds/seed.ts"

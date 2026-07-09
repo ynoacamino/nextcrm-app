@@ -1,16 +1,4 @@
-// PRSTRESS — Saturación del listado de cuentas (lectura bajo carga creciente).
-//
-// META:
-//   cases:    PRSTRESS-001, PRSTRESS-007, PRSTRESS-009, PRSTRESS-014, PRSTRESS-015
-//   endpoint: GET /crm/accounts — getAccounts
-//   objetivo: localizar el punto de saturación (10 → 200+ VU), medir la tasa de
-//             error y la degradación del tiempo de respuesta durante la rampa,
-//             identificar el cuello de botella principal y verificar la
-//             recuperación tras la caída de carga.
-//   umbral:   lectura STRESS — p95 < 2s, p99 < 3s, error < 2% (Diseño §4.3)
-//   carga:    rampa 10 → 200 VU, 20 min (Diseño §4.1)
-//   nota:     PRSTRESS-014 (cuello de botella) y PRSTRESS-011/012/013 (recursos)
-//             se analizan correlacionando esta ejecución con Prometheus/Grafana.
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

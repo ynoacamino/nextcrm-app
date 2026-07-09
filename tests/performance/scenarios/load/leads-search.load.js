@@ -1,11 +1,4 @@
-// PRLOAD — Búsqueda de leads por nombre y email (lectura).
-//
-// META:
-//   cases:    PRLOAD-015, PRLOAD-016
-//   endpoint: GET /crm/leads con query de búsqueda — getLeads
-//   objetivo: tiempo de respuesta de la búsqueda de leads por nombre y por email.
-//   umbral:   lectura LOAD — p95 < 500ms, p99 < 1s, error < 0.5%
-//   carga:    50 VU, 10 min
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

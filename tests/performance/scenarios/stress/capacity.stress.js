@@ -1,17 +1,4 @@
-// PRSTRESS — Capacidad máxima de throughput y estabilidad de recursos.
-//
-// META:
-//   cases:    PRSTRESS-011, PRSTRESS-012, PRSTRESS-013, PRSTRESS-016
-//   endpoint: GET /crm/accounts (carga por tasa de llegada) — getAccounts
-//   objetivo: empujar el sistema por TASA DE LLEGADA (RPS) en lugar de por VUs
-//             para medir el throughput máximo sostenible (PRSTRESS-016) y
-//             observar la estabilidad al ~80% de capacidad de conexiones de
-//             PostgreSQL (011), CPU (012) y memoria (013) de la aplicación.
-//   umbral:   lectura STRESS — p95 < 2s, error < 2% (Diseño §4.3)
-//   carga:    rampa de 50 → 400 RPS (ajustable con -e TARGET_RPS).
-//   nota:     las métricas de infraestructura (conexiones, CPU, memoria) se leen
-//             de Prometheus/Grafana correlacionadas con la ventana de esta
-//             ejecución (Diseño §4.4). k6 aporta el RPS efectivo y la latencia.
+
 
 import { group } from "k6";
 import { ROUTES } from "../../config/environment.js";

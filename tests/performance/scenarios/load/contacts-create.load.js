@@ -1,12 +1,4 @@
-// PRLOAD — Creación y borrado lógico de contactos (escritura).
-//
-// META:
-//   cases:    PRLOAD-006, PRLOAD-007, PRLOAD-008, PRLOAD-020
-//   endpoint: Server Action createContact / deleteContact (POST Next-Action)
-//   objetivo: tiempo de respuesta, throughput y tasa de error de la creación de
-//             contacto, más el borrado lógico, bajo carga normal.
-//   umbral:   escritura LOAD — p95 < 800ms, p99 < 1.5s, error < 0.5%
-//   carga:    20 VU, 10 min (Diseño §4.1)
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

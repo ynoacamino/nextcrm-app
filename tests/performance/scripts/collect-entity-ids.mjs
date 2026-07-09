@@ -1,14 +1,4 @@
-// Recolecta IDs de entidades sembradas y los vuelca en data/entity-ids.json.
-//
-// Los escenarios de k6 que operan sobre entidades existentes (update, convert,
-// line-item, actividades por entidad) leen ese pool con lib/data.js#idPool.
-//
-// Uso:
-//   node tests/performance/scripts/collect-entity-ids.mjs
-//   POOL_SIZE=500 DATABASE_URL=postgres://... node tests/performance/scripts/collect-entity-ids.mjs
-//
-// Requisitos: haber sembrado el volumen de datos (Diseño §3.4.1/§3.4.2) y tener
-// DATABASE_URL apuntando a la BD de pruebas (por defecto lee .env.integration).
+
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -21,7 +11,7 @@ const POOL_SIZE = Number(process.env.POOL_SIZE || 300);
 
 function loadDatabaseUrl() {
   if (process.env.DATABASE_URL) return process.env.DATABASE_URL;
-  // Fallback: parsear DATABASE_URL desde .env.integration sin dependencias.
+  
   const envPath = resolve(__dirname, "../../../.env.test");
   if (existsSync(envPath)) {
     const line = readFileSync(envPath, "utf8")
@@ -32,8 +22,6 @@ function loadDatabaseUrl() {
   throw new Error("DATABASE_URL no está definida y no se encontró en .env.test");
 }
 
-// tabla -> query. Los targets deben estar SIN convertir y no borrados para poder
-// convertirlos en las pruebas (convertTarget es idempotente si ya se convirtió).
 const QUERIES = {
   accounts: `SELECT id FROM "crm_Accounts" WHERE "deletedAt" IS NULL ORDER BY id LIMIT $1`,
   contacts: `SELECT id FROM "crm_Contacts" WHERE "deletedAt" IS NULL ORDER BY id LIMIT $1`,

@@ -1,12 +1,4 @@
-// PRSTRESS — Saturación del dashboard (lectura compleja).
-//
-// META:
-//   cases:    PRSTRESS-005
-//   endpoint: GET /crm/dashboard — resúmenes agregados
-//   objetivo: punto de saturación del dashboard (10 → 100 VU); es la operación
-//             de lectura más costosa por agregar múltiples consultas.
-//   umbral:   compleja STRESS — p95 < 4s, p99 < 6s, error < 2% (Diseño §4.3)
-//   carga:    rampa 10 → 100 VU, 15 min
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

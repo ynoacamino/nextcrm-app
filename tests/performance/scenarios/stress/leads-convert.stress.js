@@ -1,13 +1,4 @@
-// PRSTRESS — Saturación de la conversión de leads (escritura compleja).
-//
-// META:
-//   cases:    PRSTRESS-003
-//   endpoint: Server Action convertTarget (POST Next-Action)
-//   objetivo: punto de saturación de la conversión de leads (10 → 50 VU), que
-//             ejecuta una transacción multi-tabla.
-//   umbral:   compleja STRESS — p95 < 4s, p99 < 6s, error < 2% (Diseño §4.3)
-//   carga:    rampa 10 → 50 VU, 15 min
-//   requiere: pool amplio de targets sin convertir (data/entity-ids.json → "targets").
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

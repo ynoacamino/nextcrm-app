@@ -1,8 +1,4 @@
-// Generadores de datos y utilidades de selección aleatoria.
-//
-// Los payloads reflejan las firmas reales de las Server Actions del CRM
-// (actions/crm/**). Cada creación usa __VU/__ITER + un sufijo aleatorio para
-// garantizar unicidad entre iteraciones y VUs.
+
 
 import { SharedArray } from "k6/data";
 
@@ -16,7 +12,6 @@ function unique(prefix) {
   return `${prefix}-${SUFFIX}-vu${__VU}-it${__ITER}-${rid()}`;
 }
 
-// createContact(data) — actions/crm/contacts/create-contact.ts
 export function newContactArgs(assignedAccount) {
   const id = unique("ct");
   return [
@@ -31,7 +26,6 @@ export function newContactArgs(assignedAccount) {
   ];
 }
 
-// createAccount(data) — actions/crm/accounts/create-account.ts
 export function newAccountArgs() {
   const id = unique("acc");
   return [
@@ -46,7 +40,6 @@ export function newAccountArgs() {
   ];
 }
 
-// updateAccount(data) — actions/crm/accounts/update-account.ts
 export function updateAccountArgs(accountId) {
   return [
     {
@@ -57,7 +50,6 @@ export function updateAccountArgs(accountId) {
   ];
 }
 
-// createOpportunity(data) — actions/crm/opportunities/create-opportunity.ts
 export function newOpportunityArgs(accountId, assignedTo) {
   const id = unique("opp");
   return [
@@ -76,7 +68,6 @@ export function newOpportunityArgs(accountId, assignedTo) {
   ];
 }
 
-// updateOpportunity(data) — actions/crm/opportunities/update-opportunity.ts
 export function updateOpportunityArgs(opportunityId) {
   return [
     {
@@ -89,7 +80,6 @@ export function updateOpportunityArgs(opportunityId) {
   ];
 }
 
-// createActivity(data) — actions/crm/activities/create-activity.ts
 export function newActivityArgs(links) {
   return [
     {
@@ -103,7 +93,6 @@ export function newActivityArgs(links) {
   ];
 }
 
-// addContractLineItem(data) — actions/crm/contract-line-items/add-line-item
 export function newLineItemArgs(contractId) {
   return [
     {
@@ -117,28 +106,22 @@ export function newLineItemArgs(contractId) {
   ];
 }
 
-// convertTarget(targetId) — actions/crm/targets/convert-target.ts
 export function convertTargetArgs(targetId) {
   return [targetId];
 }
 
-// deleteContact(contactId) — actions/crm/contacts/delete-contact.ts
 export function deleteContactArgs(contactId) {
   return [contactId];
 }
 
-// getActivitiesByEntity(entityType, entityId) — args posicionales.
 export function activitiesByEntityArgs(entityType, entityId) {
   return [entityType, entityId];
 }
 
-// Carga un pool de IDs sembrados (data/entity-ids.json) para escenarios que
-// necesitan operar sobre entidades existentes (update, convert, line-item...).
-// Generar el archivo con scripts/collect-entity-ids.mjs (Diseño §3.4.1).
 export function idPool(entity) {
   return new SharedArray(`ids-${entity}`, () => {
     try {
-      const raw = open(import.meta.resolve("../data/entity-ids.json"));
+      const raw = open("../data/entity-ids.json");
       const parsed = JSON.parse(raw);
       return parsed[entity] || [];
     } catch (_e) {
@@ -151,7 +134,6 @@ export function idPool(entity) {
   });
 }
 
-// Escoge un elemento pseudoaleatorio de un array (o null si está vacío).
 export function pick(arr) {
   if (!arr || arr.length === 0) return null;
   return arr[Math.floor(Math.random() * arr.length)];

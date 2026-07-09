@@ -1,13 +1,4 @@
-// PRSTRESS — Saturación de creación de actividades (escritura con múltiples inserciones).
-//
-// META:
-//   cases:    PRSTRESS-006
-//   endpoint: Server Action createActivity (POST Next-Action)
-//   objetivo: punto de saturación de la creación de actividades con vínculos
-//             (5 → 30 VU); cada creación implica varias inserciones en transacción.
-//   umbral:   escritura STRESS — p95 < 2.5s, p99 < 4s, error < 2% (Diseño §4.3)
-//   carga:    rampa 5 → 30 VU, 15 min
-//   requiere: pool de accounts en data/entity-ids.json (clave "accounts").
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

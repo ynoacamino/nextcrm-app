@@ -1,16 +1,4 @@
-// PRSPIKE — Pico combinado lectura + escritura.
-//
-// META:
-//   cases:    PRSPIKE-004, PRSPIKE-006
-//   endpoint: GET /crm/accounts (lectura) + Server Action createOpportunity (escritura)
-//   objetivo: manejo de un pico combinado de lectura y escritura (10 → 150 VU) y
-//             medición del p95 de creación de oportunidades durante el pico.
-//   umbral:   SPIKE — p95 < 2s, p99 < 3s, error < 2% (Diseño §4.3)
-//   carga:    10 → 150 VU en 1 min, sostenido 3 min (Plan §5.1 SPIKE-02)
-//   requiere: pool de accounts en data/entity-ids.json (clave "accounts").
-//
-// Reparto de tráfico: ~70% lecturas / ~30% escrituras, para reproducir un
-// pico realista dominado por navegación con creaciones intercaladas.
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";
