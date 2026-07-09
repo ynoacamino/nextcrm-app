@@ -1,29 +1,5 @@
-#!/usr/bin/env python3
-"""Genera tablas y gráficos de las pruebas de rendimiento (k6) desde los JSON
-de resumen (handleSummary) y, opcionalmente, series temporales de k6 --out json.
 
-Reutilizable: apunta -i a la carpeta de resultados y -o a la de salida. Pensado
-para correr igual en local o en un VPS tras ejecutar la suite k6.
 
-Uso:
-    python3 tests/performance/scripts/perf-charts.py \
-        -i tests/performance/reports \
-        -o tests/performance/docs/img
-
-Salida:
-    <out>/test_<caso>.png      un gráfico por test (percentiles p50/p90/p95/max)
-    <out>/serie_<caso>.png     latencia en el tiempo (si hay <caso>.ndjson)
-    <out>/comparativa_p95.png  comparativa de p95 entre tests
-    <out>/comparativa_rps.png  comparativa de throughput (RPS)
-    <out>/comparativa_ttfb.png comparativa de TTFB p95
-    <out>/tabla_metricas.md    tabla Markdown
-    <out>/tabla_metricas.csv   tabla CSV
-
-Requisitos: matplotlib  (pip install matplotlib)
-
-Para obtener las series temporales (grafico latencia-en-el-tiempo por test),
-ejecutar cada escenario de k6 añadiendo:  --out json=<caso>.ndjson
-"""
 import argparse
 import csv
 import glob
@@ -35,8 +11,6 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-
-# ---------------------------------------------------------------- helpers
 
 def val(metrics, name, key):
     try:
@@ -89,8 +63,6 @@ def color_for(p95):
         return "#f59e0b"
     return "#ef4444"
 
-# ---------------------------------------------------------------- charts
-
 def chart_per_test(row, outdir):
     labels = ["p50", "p90", "p95", "max"]
     vals = [(row[k] or 0) / 1000 for k in ["p50", "p90", "p95", "max"]]
@@ -133,7 +105,7 @@ def chart_compare(rows, outdir, key, title, fname, unit="s"):
     return path
 
 def chart_timeseries(name, ndjson, outdir):
-    """Latencia (http_req_duration) en el tiempo desde un stream k6 --out json."""
+    
     ts, dur = [], []
     t0 = None
     try:
@@ -148,7 +120,7 @@ def chart_timeseries(name, ndjson, outdir):
                     t = d["time"]
                     if t0 is None:
                         t0 = t
-                    ts.append(len(ts))  # índice; el eje real requiere parseo ISO
+                    ts.append(len(ts))  
                     dur.append(d["value"])
     except Exception as e:
         print(f"[warn] serie {ndjson}: {e}", file=sys.stderr)
@@ -165,8 +137,6 @@ def chart_timeseries(name, ndjson, outdir):
     fig.savefig(path, dpi=130, bbox_inches="tight")
     plt.close(fig)
     return path
-
-# ---------------------------------------------------------------- tables
 
 def write_tables(rows, outdir):
     cols = ["name", "p50", "p95", "p99", "max", "ttfb95", "rps", "reqs", "err", "checks"]
@@ -187,8 +157,6 @@ def write_tables(rows, outdir):
             w.writerow([r["name"], r["p50"], r["p95"], r["p99"], r["max"],
                         r["ttfb95"], round(r["rps"], 3), r["reqs"],
                         round(r["err"], 3), round(r["checks"], 1)])
-
-# ---------------------------------------------------------------- main
 
 def main():
     ap = argparse.ArgumentParser(description="Gráficos y tablas de pruebas de rendimiento k6")
@@ -217,7 +185,6 @@ def main():
     print(f"OK: {len(rows)} tests · {len(per)} gráficos por test + 3 comparativas + tabla")
     for r in rows:
         print(f"  {r['name']:<28} p95={fmt(r['p95']):>9}  rps={r['rps']:.2f}  err={r['err']:.2f}%")
-
 
 if __name__ == "__main__":
     main()

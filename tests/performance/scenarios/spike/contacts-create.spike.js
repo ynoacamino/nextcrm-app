@@ -1,12 +1,4 @@
-// PRSPIKE — Pico de tráfico sobre la creación de contactos (escritura).
-//
-// META:
-//   cases:    PRSPIKE-002, PRSPIKE-008
-//   endpoint: Server Action createContact (POST Next-Action)
-//   objetivo: verificar ausencia de errores 5xx y medir la tasa de error de
-//             escritura ante un pico repentino (10 → 80 VU en 1 min).
-//   umbral:   SPIKE — p95 < 2s, p99 < 3s, error < 2% (Diseño §4.3)
-//   carga:    10 → 80 VU en 1 min, sostenido 5 min
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

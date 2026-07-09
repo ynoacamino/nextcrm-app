@@ -1,13 +1,4 @@
-// PRLOAD — Oportunidades: listado por etapa (lectura) y actualización (escritura).
-//
-// META:
-//   cases:    PRLOAD-011, PRLOAD-017
-//   endpoint: GET /crm/opportunities (getOpportunity) + Server Action updateOpportunity
-//   objetivo: tiempo de respuesta del listado por etapa y de la actualización
-//             de oportunidad bajo carga normal.
-//   umbral:   lectura LOAD p95 < 500ms; escritura LOAD p95 < 800ms
-//   carga:    40 VU, 10 min (mezcla lectura+escritura)
-//   requiere: pool de oportunidades en data/entity-ids.json (clave "opportunities").
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

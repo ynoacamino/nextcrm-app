@@ -1,13 +1,4 @@
-// PRLOAD — Adición de partida a contrato (escritura).
-//
-// META:
-//   cases:    PRLOAD-021
-//   endpoint: Server Action addContractLineItem (POST Next-Action)
-//   objetivo: tiempo de respuesta de la adición de una partida (line item) a un
-//             contrato existente bajo carga normal.
-//   umbral:   escritura LOAD — p95 < 800ms, p99 < 1.5s, error < 0.5%
-//   carga:    20 VU, 10 min
-//   requiere: pool de contracts en data/entity-ids.json (clave "contracts").
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

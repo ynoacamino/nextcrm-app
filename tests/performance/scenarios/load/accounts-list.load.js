@@ -1,12 +1,4 @@
-// PRLOAD — Listado y ordenación de cuentas (lectura).
-//
-// META (mismo estilo que el bloque `meta` de las pruebas de integración):
-//   cases:    PRLOAD-001, PRLOAD-002, PRLOAD-003, PRLOAD-023, PRLOAD-024, PRLOAD-025
-//   endpoint: GET /crm/accounts (Server Component) — getAccounts
-//   objetivo: medir tiempo de respuesta, throughput y tasa de error del
-//             listado de cuentas con paginación y ordenación bajo carga normal.
-//   umbral:   lectura LOAD — p95 < 500ms, p99 < 1s, error < 0.5% (Diseño §4.3)
-//   carga:    50 VU, 10 min (Diseño §4.1)
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

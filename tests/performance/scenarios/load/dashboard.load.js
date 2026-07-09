@@ -1,11 +1,4 @@
-// PRLOAD — Dashboard con resúmenes agregados (lectura compleja).
-//
-// META:
-//   cases:    PRLOAD-012
-//   endpoint: GET /crm/dashboard — resúmenes agregados
-//   objetivo: tiempo de respuesta del dashboard, que agrega múltiples consultas.
-//   umbral:   compleja LOAD — p95 < 1.5s, p99 < 2.5s, error < 0.5% (Diseño §4.3)
-//   carga:    30 VU, 10 min (Plan §5.1 LOAD-04)
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

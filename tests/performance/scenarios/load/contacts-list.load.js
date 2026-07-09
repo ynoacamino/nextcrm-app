@@ -1,12 +1,4 @@
-// PRLOAD — Listado de contactos con filtros (lectura).
-//
-// META:
-//   cases:    PRLOAD-004, PRLOAD-005
-//   endpoint: GET /crm/contacts — getContactsByAccountId / getLeads / getOpportunity
-//   objetivo: tiempo de respuesta y throughput del listado de contactos con
-//             filtros y ordenación bajo carga normal.
-//   umbral:   lectura LOAD — p95 < 500ms, p99 < 1s, error < 0.5%
-//   carga:    50 VU, 10 min
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

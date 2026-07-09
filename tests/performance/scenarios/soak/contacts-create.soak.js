@@ -1,12 +1,4 @@
-// PRSOAK — Resistencia de la creación de contactos (escritura sostenida).
-//
-// META:
-//   cases:    PRSOAK-002
-//   endpoint: Server Action createContact (POST Next-Action)
-//   objetivo: bajo carga sostenida verificar degradación < 10% en el tiempo de
-//             respuesta de la creación de contactos a lo largo de 4 horas.
-//   umbral:   SOAK — p95 < 1s, p99 < 1.5s, error < 0.5% (Diseño §4.3)
-//   carga:    20 VU, 4 h. Acortar con -e DURATION_SCALE.
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";

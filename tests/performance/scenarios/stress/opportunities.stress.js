@@ -1,13 +1,4 @@
-// PRSTRESS — Oportunidades: saturación de listado y de creación.
-//
-// META:
-//   cases:    PRSTRESS-004, PRSTRESS-010
-//   endpoint: GET /crm/opportunities (getOpportunity) + Server Action createOpportunity
-//   objetivo: punto de saturación del listado por etapa (10 → 150 VU) y
-//             degradación del tiempo de respuesta de creación de oportunidades.
-//   umbral:   lectura STRESS p95 < 2s; escritura STRESS p95 < 2.5s (Diseño §4.3)
-//   carga:    rampa 10 → 150 VU, 15 min
-//   requiere: pool de accounts en data/entity-ids.json (clave "accounts").
+
 
 import { group, sleep } from "k6";
 import { ROUTES } from "../../config/environment.js";
