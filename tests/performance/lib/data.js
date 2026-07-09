@@ -138,7 +138,7 @@ export function activitiesByEntityArgs(entityType, entityId) {
 export function idPool(entity) {
   return new SharedArray(`ids-${entity}`, () => {
     try {
-      const raw = open(`../data/entity-ids.json`);
+      const raw = open(import.meta.resolve("../data/entity-ids.json"));
       const parsed = JSON.parse(raw);
       return parsed[entity] || [];
     } catch (_e) {

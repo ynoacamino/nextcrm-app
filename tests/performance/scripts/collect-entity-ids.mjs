@@ -22,14 +22,14 @@ const POOL_SIZE = Number(process.env.POOL_SIZE || 300);
 function loadDatabaseUrl() {
   if (process.env.DATABASE_URL) return process.env.DATABASE_URL;
   // Fallback: parsear DATABASE_URL desde .env.integration sin dependencias.
-  const envPath = resolve(__dirname, "../../../.env.integration");
+  const envPath = resolve(__dirname, "../../../.env.test");
   if (existsSync(envPath)) {
     const line = readFileSync(envPath, "utf8")
       .split("\n")
       .find((l) => l.startsWith("DATABASE_URL="));
     if (line) return line.slice("DATABASE_URL=".length).trim().replace(/^"|"$/g, "");
   }
-  throw new Error("DATABASE_URL no está definida y no se encontró en .env.integration");
+  throw new Error("DATABASE_URL no está definida y no se encontró en .env.test");
 }
 
 // tabla -> query. Los targets deben estar SIN convertir y no borrados para poder
