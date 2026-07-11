@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -uo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 REPORTS="${REPORTS_DIR:-$HERE/reports}"
@@ -10,6 +10,10 @@ shift
 EXTRA_ARGS=("$@")
 
 mkdir -p "$REPORTS"
+
+PASSED=0
+FAILED=0
+FAILED_TESTS=""
 
 k6_run() {
   local f="$1"
@@ -30,7 +34,17 @@ case "$SUITE" in
     for f in "$HERE"/scenarios/"$SUITE"/*."$SUITE".js; do k6_run "$f" || true; done
     ;;
   *)
-    echo "Suite desconocida: $SUITE (usa load|stress|spike|soak|smoke)" >&2
+    echo "Suite desconocida: $SUITE (usa load|stress|spike|soak|smoke|all)" >&2
     exit 1
     ;;
 esac
+
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "▶ RESUMEN: $PASSED pasaron, $FAILED fallaron"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+if [ "$FAILED" -gt 0 ]; then
+  echo -e "Tests que fallaron:\n$FAILED_TESTS"
+fi
+echo ""
+ls -la "$REPORTS"/*.json 2>/dev/null || echo "No hay reportes JSON generados"
