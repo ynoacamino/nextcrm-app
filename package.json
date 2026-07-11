@@ -147,6 +147,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.16",
+    "@faker-js/faker": "^10.5.0",
     "@playwright/test": "^1.58.2",
     "@types/bcrypt": "^6.0.0",
     "@types/bcryptjs": "^3.0.0",

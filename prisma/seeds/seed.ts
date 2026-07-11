@@ -18,6 +18,7 @@ import leadTypesData from "../initial-data/crm_Lead_Types.json";
 import { seedCurrencies } from "./currencies";
 import { seedInvoices } from "./invoices";
 import { seedCrmFixtures } from "./fixtures";
+import { seedPerfData } from "./perf-seed";
 
 const connectionString = process.env.DATABASE_URL!;
 const pool = new Pool({ connectionString });
@@ -180,6 +181,15 @@ async function main() {
   // tests/integration per §3.4.2 of "Diseño de Pruebas de Integración".
   // Activated automatically by the integration env file; safe no-op otherwise.
   await seedCrmFixtures(prisma, testUserEmail);
+
+  // Performance test data (gated by PERF_SEED=true). Creates ~100 entities
+  // per CRM type for load testing. Idempotent: skips if enough data exists.
+  if (process.env.PERF_SEED === "true") {
+    const admin = await prisma.users.findUnique({ where: { email: testUserEmail } });
+    if (admin) {
+      await seedPerfData(prisma, admin.id);
+    }
+  }
 
   console.log("-------- Seed DB completed --------");
 }

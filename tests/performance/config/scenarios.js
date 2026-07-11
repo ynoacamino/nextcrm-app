@@ -3,8 +3,12 @@
 const SCALE = Number(__ENV.DURATION_SCALE || 1);
 
 function min(m) {
-  const scaled = Math.max(1, Math.round(m * SCALE));
-  return `${scaled}m`;
+  const scaled = m * SCALE;
+  if (scaled < 1) {
+    const seconds = Math.max(10, Math.round(scaled * 60));
+    return `${seconds}s`;
+  }
+  return `${Math.round(scaled)}m`;
 }
 function sec(s) {
   const scaled = Math.max(1, Math.round(s * SCALE));

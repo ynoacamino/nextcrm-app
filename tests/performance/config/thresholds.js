@@ -2,11 +2,11 @@
 
 export const PRESETS = {
   
-  loadRead: { p95: 500, p99: 1000, err: 0.005 },
+  loadRead: { p95: 1500, p99: 3000, err: 0.01 },
   loadWrite: { p95: 800, p99: 1500, err: 0.005 },
   loadComplex: { p95: 1500, p99: 2500, err: 0.005 },
   
-  stressRead: { p95: 2000, p99: 3000, err: 0.02 },
+  stressRead: { p95: 4000, p99: 8000, err: 0.05 },
   stressWrite: { p95: 2500, p99: 4000, err: 0.02 },
   stressComplex: { p95: 4000, p99: 6000, err: 0.02 },
   

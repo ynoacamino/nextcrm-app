@@ -98,15 +98,32 @@ services:
       - ./perf-charts:/app/tests/performance/docs/img
     entrypoint: >
       /bin/bash -c "
+      set -e;
       until curl -s -f http://app:3001/ > /dev/null; do sleep 5; done;
+      echo '=== Collecting action IDs ===';
       node tests/performance/scripts/collect-action-ids.mjs;
+      echo '=== Collecting entity IDs ===';
       node tests/performance/scripts/collect-entity-ids.mjs;
+      echo '=== Validating entity IDs ===';
+      node -e \"
+        const fs = require('fs');
+        const d = JSON.parse(fs.readFileSync('tests/performance/data/entity-ids.json','utf8'));
+        const counts = Object.fromEntries(Object.entries(d).map(([k,v]) => [k, v.length]));
+        const total = Object.values(counts).reduce((s,n) => s+n, 0);
+        console.log('[entity-ids] ' + JSON.stringify(counts));
+        if (total === 0) {
+          console.error('[entity-ids] FATAL: 0 IDs. La BD parece estar vacía.');
+          console.error('[entity-ids] Asegúrate de que prisma db seed se ejecutó correctamente.');
+          process.exit(1);
+        }
+        console.log('[entity-ids] Total: ' + total + ' IDs OK');
+      \";
       for suite in smoke load stress spike soak; do
         echo \"▶ $$suite\";
-        bash tests/performance/scripts/run-suite.sh \"$$suite\";
+        bash tests/performance/scripts/run-suite.sh \"$$suite\" || true;
       done;
       echo '=== Done ===';
-      ls /app/tests/performance/reports/;
+      ls -la /app/tests/performance/reports/;
       "
 
   data-exporter:

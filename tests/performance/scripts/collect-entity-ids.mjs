@@ -32,8 +32,14 @@ const QUERIES = {
 };
 
 async function main() {
-  const client = new Client({ connectionString: loadDatabaseUrl() });
+  const dbUrl = loadDatabaseUrl();
+  const maskedUrl = dbUrl.replace(/:\/\/([^:]+):([^@]+)@/, '://$1:***@');
+  console.log(`[collect] conectando a ${maskedUrl}`);
+
+  const client = new Client({ connectionString: dbUrl });
   await client.connect();
+  console.log(`[collect] conexión exitosa`);
+
   const pool = {};
   try {
     for (const [key, sql] of Object.entries(QUERIES)) {
@@ -44,8 +50,15 @@ async function main() {
   } finally {
     await client.end();
   }
+
+  const totalIds = Object.values(pool).reduce((s, arr) => s + arr.length, 0);
+  if (totalIds === 0) {
+    console.error('[collect] WARN: 0 IDs encontrados en total.');
+    console.error('[collect] Verifica que prisma db seed se ejecutó correctamente.');
+  }
+
   writeFileSync(OUT, JSON.stringify(pool, null, 2));
-  console.log(`[collect] escrito ${OUT}`);
+  console.log(`[collect] escrito ${OUT} (${totalIds} IDs totales)`);
 }
 
 main().catch((e) => {
