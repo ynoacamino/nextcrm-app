@@ -98,15 +98,30 @@ services:
       - ./perf-charts:/app/tests/performance/docs/img
     entrypoint: >
       /bin/bash -c "
-      until curl -s -f http://app:3001/ > /dev/null; do sleep 5; done;
-      node tests/performance/scripts/collect-action-ids.mjs;
-      node tests/performance/scripts/collect-entity-ids.mjs;
-      for suite in smoke load stress spike soak; do
-        echo \"▶ $$suite\";
-        bash tests/performance/scripts/run-suite.sh \"$$suite\";
+      set -e;
+      echo '==> Esperando a que la app esté lista...';
+      until curl -s -f http://app:3001/ > /dev/null 2>&1; do sleep 5; done;
+      echo '==> App lista. Verificando rutas...';
+      for route in /crm/accounts /crm/contacts /crm/leads /crm/opportunities /crm/dashboard; do
+        STATUS=$(curl -s -o /dev/null -w '%{http_code}' http://app:3001$$route);
+        echo \"  $$route -> HTTP $$STATUS\";
       done;
-      echo '=== Done ===';
-      ls /app/tests/performance/reports/;
+      echo '';
+      echo '==> Recolección de Server Action IDs...';
+      node tests/performance/scripts/collect-action-ids.mjs || echo 'WARN: collect-action-ids falló, usando hashes hardcoded';
+      echo '';
+      echo '==> Recolección de Entity IDs...';
+      node tests/performance/scripts/collect-entity-ids.mjs || echo 'WARN: collect-entity-ids falló, tests sin entity IDs';
+      echo '';
+      echo '==> Iniciando suites de performance...';
+      bash tests/performance/scripts/run-suite.sh all;
+      echo '';
+      echo '==> Tests completados. Generando charts...';
+      pip install matplotlib -q 2>/dev/null && python3 tests/performance/scripts/perf-charts.py -i /app/tests/performance/reports -o /app/tests/performance/docs/img || echo 'WARN: generación de charts falló';
+      echo '';
+      echo '=== RESUMEN FINAL ===';
+      ls -la /app/tests/performance/reports/*.json 2>/dev/null | wc -l | xargs -I {} echo '{} reports JSON generados';
+      ls /app/tests/performance/reports/*.json 2>/dev/null || echo 'No hay reports';
       "
 
   data-exporter:
