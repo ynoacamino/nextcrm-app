@@ -4,8 +4,10 @@ set -uo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 REPORTS="${REPORTS_DIR:-$HERE/reports}"
-SUITE="${1:-load}"
-shift || true
+SUITE="${1:?Uso: $0 <suite> [extra-k6-args...]}"
+shift
+
+EXTRA_ARGS=("$@")
 
 mkdir -p "$REPORTS"
 
@@ -17,62 +19,19 @@ k6_run() {
   local f="$1"
   local name
   name="$(basename "$f" | sed 's/\.[^.]*$//')"
-  shift
   echo "════════════════════════════════════════════════════════════"
   echo "▶ k6 run $(basename "$f")"
   echo "════════════════════════════════════════════════════════════"
-  if ( cd "$HERE" && k6 run --summary-export="$REPORTS/$name.json" --out csv="$REPORTS/$name-raw-metrics.csv" "$@" "$f" ); then
-    PASSED=$((PASSED + 1))
-    echo "✅ $(basename "$f") completado exitosamente"
-  else
-    FAILED=$((FAILED + 1))
-    FAILED_TESTS="$FAILED_TESTS  - $(basename "$f")\n"
-    echo "❌ $(basename "$f") falló (exit $?), continuando con el siguiente..."
-  fi
-  echo ""
-}
-
-run_suite() {
-  local suite="$1"
-  local count=0
-  for f in "$HERE"/scenarios/"$suite"/*."$suite".js; do
-    [ -f "$f" ] || continue
-    count=$((count + 1))
-    k6_run "$f" "$@"
-  done
-  return $count
+  ( cd "$HERE" && k6 run --summary-export="$REPORTS/$name.json" --out csv="$REPORTS/$name-raw-metrics.csv" "${EXTRA_ARGS[@]}" "$f" )
 }
 
 case "$SUITE" in
   smoke)
     export DURATION_SCALE="${DURATION_SCALE:-0.05}"
-    echo "▶ Ejecutando suite SMOKE (DURATION_SCALE=$DURATION_SCALE)"
-    for f in "$HERE"/scenarios/load/*.load.js; do
-      [ -f "$f" ] || continue
-      k6_run "$f" "$@"
-    done
+    for f in "$HERE"/scenarios/load/*.load.js; do k6_run "$f" || true; done
     ;;
   load|stress|spike|soak)
-    echo "▶ Ejecutando suite ${SUITE^^}"
-    run_suite "$SUITE" "$@"
-    ;;
-  all)
-    echo "▶ Ejecutando TODAS las suites"
-    export DURATION_SCALE="${DURATION_SCALE:-0.05}"
-    for s in smoke load stress spike soak; do
-      echo ""
-      echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-      echo "▶ Suite: $s"
-      echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-      if [ "$s" = "smoke" ]; then
-        for f in "$HERE"/scenarios/load/*.load.js; do
-          [ -f "$f" ] || continue
-          k6_run "$f" "$@"
-        done
-      else
-        run_suite "$s" "$@"
-      fi
-    done
+    for f in "$HERE"/scenarios/"$SUITE"/*."$SUITE".js; do k6_run "$f" || true; done
     ;;
   *)
     echo "Suite desconocida: $SUITE (usa load|stress|spike|soak|smoke|all)" >&2
