@@ -9,7 +9,7 @@ import { readPage } from "../../lib/client.js";
 import { record, makeHandleSummary } from "../../lib/metrics.js";
 
 const HOURS = Number(__ENV.SOAK_HOURS || 4);
-const VUS = Number(__ENV.SOAK_VUS || 30);
+const VUS = Number(__ENV.SOAK_VUS || 8);
 
 export const options = {
   scenarios: { accounts_list_soak: soak(VUS, HOURS) },

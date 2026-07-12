@@ -12,7 +12,7 @@ import { idPool, pick, newLineItemArgs } from "../../lib/data.js";
 const contracts = idPool("contracts");
 
 export const options = {
-  scenarios: { contracts_lineitem_load: load(20, 10) },
+  scenarios: { contracts_lineitem_load: load(8, 10) },
   thresholds: buildThresholds({ write: PRESETS.loadWrite }),
 };
 

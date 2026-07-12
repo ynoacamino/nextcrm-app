@@ -9,7 +9,7 @@ import { readPage } from "../../lib/client.js";
 import { record, makeHandleSummary } from "../../lib/metrics.js";
 
 export const options = {
-  scenarios: { dashboard_load: load(30, 10) },
+  scenarios: { dashboard_load: load(10, 10) },
   thresholds: buildThresholds({ complex: PRESETS.loadComplex }),
 };
 

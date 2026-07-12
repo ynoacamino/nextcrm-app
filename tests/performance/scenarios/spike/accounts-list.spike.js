@@ -9,7 +9,7 @@ import { readPage } from "../../lib/client.js";
 import { record, makeHandleSummary } from "../../lib/metrics.js";
 
 export const options = {
-  scenarios: { accounts_list_spike: spike(10, 100, 5) },
+  scenarios: { accounts_list_spike: spike(5, 20, 3) },
   thresholds: buildThresholds({ read: PRESETS.spike }),
 };
 

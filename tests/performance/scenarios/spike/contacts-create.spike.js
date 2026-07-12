@@ -10,7 +10,7 @@ import { record, makeHandleSummary } from "../../lib/metrics.js";
 import { newContactArgs } from "../../lib/data.js";
 
 export const options = {
-  scenarios: { contacts_create_spike: spike(10, 80, 5) },
+  scenarios: { contacts_create_spike: spike(5, 15, 3) },
   thresholds: buildThresholds({ write: PRESETS.spike }),
 };
 

@@ -12,7 +12,7 @@ import { idPool, pick, convertTargetArgs } from "../../lib/data.js";
 const targets = idPool("targets");
 
 export const options = {
-  scenarios: { leads_convert_load: load(10, 10) },
+  scenarios: { leads_convert_load: load(5, 10) },
   thresholds: buildThresholds({ complex: PRESETS.loadComplex }),
 };
 

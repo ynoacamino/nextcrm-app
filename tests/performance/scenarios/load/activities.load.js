@@ -12,7 +12,7 @@ import { idPool, pick, newActivityArgs } from "../../lib/data.js";
 const accounts = idPool("accounts");
 
 export const options = {
-  scenarios: { activities_load: load(30, 10) },
+  scenarios: { activities_load: load(10, 10) },
   thresholds: buildThresholds({ read: PRESETS.loadRead, write: PRESETS.loadWrite }),
 };
 

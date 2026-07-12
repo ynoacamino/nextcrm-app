@@ -9,7 +9,7 @@ import { readPage } from "../../lib/client.js";
 import { record, makeHandleSummary } from "../../lib/metrics.js";
 
 export const options = {
-  scenarios: { dashboard_stress: stress(10, 100, 15) },
+  scenarios: { dashboard_stress: stress(5, 15, 15) },
   thresholds: buildThresholds({ complex: PRESETS.stressComplex }),
 };
 

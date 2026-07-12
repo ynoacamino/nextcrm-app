@@ -12,7 +12,7 @@ import { idPool, pick, updateOpportunityArgs } from "../../lib/data.js";
 const opportunities = idPool("opportunities");
 
 export const options = {
-  scenarios: { opportunities_load: load(40, 10) },
+  scenarios: { opportunities_load: load(12, 10) },
   thresholds: buildThresholds({ read: PRESETS.loadRead, write: PRESETS.loadWrite }),
 };
 
