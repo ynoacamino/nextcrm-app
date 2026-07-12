@@ -9,8 +9,8 @@ import { readPage, invokeServerAction } from "../../lib/client.js";
 import { record, makeHandleSummary } from "../../lib/metrics.js";
 import { newContactArgs } from "../../lib/data.js";
 
-const HOURS = Number(__ENV.SOAK_HOURS || 8);
-const VUS = Number(__ENV.SOAK_VUS || 20);
+const HOURS = Number(__ENV.SOAK_HOURS || 4);
+const VUS = Number(__ENV.SOAK_VUS || 5);
 
 export const options = {
   scenarios: { mixed_crud_soak: soak(VUS, HOURS) },

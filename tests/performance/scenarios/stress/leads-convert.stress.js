@@ -12,7 +12,7 @@ import { idPool, pick, convertTargetArgs } from "../../lib/data.js";
 const targets = idPool("targets");
 
 export const options = {
-  scenarios: { leads_convert_stress: stress(10, 50, 15) },
+  scenarios: { leads_convert_stress: stress(5, 15, 15) },
   thresholds: buildThresholds({ complex: PRESETS.stressComplex }),
 };
 

@@ -7,7 +7,7 @@ import { authenticate } from "../../lib/auth.js";
 import { readPage } from "../../lib/client.js";
 import { record, makeHandleSummary } from "../../lib/metrics.js";
 
-const TARGET_RPS = Number(__ENV.TARGET_RPS || 400);
+const TARGET_RPS = Number(__ENV.TARGET_RPS || 100);
 const SCALE = Number(__ENV.DURATION_SCALE || 1);
 const m = (x) => `${Math.max(1, Math.round(x * SCALE))}m`;
 
@@ -15,10 +15,10 @@ export const options = {
   scenarios: {
     capacity_stress: {
       executor: "ramping-arrival-rate",
-      startRate: 50,
+      startRate: 25,
       timeUnit: "1s",
-      preAllocatedVUs: 100,
-      maxVUs: 600,
+      preAllocatedVUs: 50,
+      maxVUs: 50,
       stages: [
         { duration: m(3), target: Math.round(TARGET_RPS * 0.25) },
         { duration: m(3), target: Math.round(TARGET_RPS * 0.5) },

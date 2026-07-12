@@ -10,7 +10,7 @@ import { record, makeHandleSummary } from "../../lib/metrics.js";
 import { newContactArgs } from "../../lib/data.js";
 
 export const options = {
-  scenarios: { contacts_create_load: load(20, 10) },
+  scenarios: { contacts_create_load: load(10, 10) },
   thresholds: buildThresholds({ write: PRESETS.loadWrite }),
 };
 

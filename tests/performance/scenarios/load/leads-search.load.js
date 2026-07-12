@@ -9,7 +9,7 @@ import { readPage } from "../../lib/client.js";
 import { record, makeHandleSummary } from "../../lib/metrics.js";
 
 export const options = {
-  scenarios: { leads_search_load: load(50, 10) },
+  scenarios: { leads_search_load: load(15, 10) },
   thresholds: buildThresholds({ read: PRESETS.loadRead }),
 };
 

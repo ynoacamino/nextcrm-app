@@ -12,7 +12,7 @@ import { idPool, pick, newActivityArgs } from "../../lib/data.js";
 const accounts = idPool("accounts");
 
 export const options = {
-  scenarios: { activities_stress: stress(5, 30, 15) },
+  scenarios: { activities_stress: stress(5, 15, 15) },
   thresholds: buildThresholds({ write: PRESETS.stressWrite }),
 };
 

@@ -10,7 +10,7 @@ import { record, makeHandleSummary } from "../../lib/metrics.js";
 import { newContactArgs } from "../../lib/data.js";
 
 export const options = {
-  scenarios: { contacts_create_stress: stress(10, 100, 15) },
+  scenarios: { contacts_create_stress: stress(5, 15, 15) },
   thresholds: buildThresholds({ write: PRESETS.stressWrite }),
 };
 

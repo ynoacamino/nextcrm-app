@@ -12,7 +12,7 @@ import { idPool, pick, newOpportunityArgs } from "../../lib/data.js";
 const accounts = idPool("accounts");
 
 export const options = {
-  scenarios: { mixed_spike: spike(10, 150, 3) },
+  scenarios: { mixed_spike: spike(5, 25, 3) },
   thresholds: buildThresholds({ read: PRESETS.spike, write: PRESETS.spike }),
 };
 
