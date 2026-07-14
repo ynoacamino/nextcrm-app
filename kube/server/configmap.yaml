@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: nextcrm-config
+  namespace: ynoacamino
+
+data:
+  BETTER_AUTH_URL: "https://nextcrm.ynoacamino.me"
+
+  DB_HOST: "nextcrm-db"
+  DB_PORT: "5432"
+  DB_USER: "nextcrm"
+  DB_NAME: "nextcrm"
+
+  NEXT_PUBLIC_MINIO_ENDPOINT: "https://nextcrm-storage.ynoacamino.me"
+  MINIO_ENDPOINT: "http://nextcrm-storage:9000"
+  MINIO_PORT: "9000"
+  MINIO_BUCKET: "nextcrm"
+  MINIO_USE_SSL: "false"
+
+  INNGEST_DEV: "1"
+  INNGEST_ID: "nextcrm"
+  INNGEST_APP_NAME: "NextCRM"
+  INNGEST_EVENT_KEY: "local"
+  INNGEST_SIGNING_KEY: ""
+  INNGEST_BASE_URL: "http://nextcrm-inngest:8288"
+
+  NEXT_PUBLIC_APP_NAME: "NextCRM"
+  NEXT_PUBLIC_APP_URL: "https://nextcrm.ynoacamino.me"
+
+  TEST_USER_EMAIL: "admin@example.com"

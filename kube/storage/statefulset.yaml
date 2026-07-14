@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: StatefulSet
+
+metadata:
+  name: nextcrm-storage
+  namespace: ynoacamino
+  labels:
+    app: nextcrm-storage
+
+spec:
+  serviceName: nextcrm-storage
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcrm-storage
+  template:
+    metadata:
+      labels:
+        app: nextcrm-storage
+    spec:
+      containers:
+        - name: minio
+          image: minio/minio:latest
+          args:
+            - server
+            - /data
+            - --console-address
+            - ":9001"
+          env:
+            - name: MINIO_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: nextcrm-secrets
+                  key: MINIO_ROOT_USER
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nextcrm-secrets
+                  key: MINIO_ROOT_PASSWORD
+          ports:
+            - name: minio-api
+              containerPort: 9000
+            - name: minio-console
+              containerPort: 9001
+          volumeMounts:
+            - name: nextcrm-storage
+              mountPath: /data
+      volumes:
+        - name: nextcrm-storage
+          persistentVolumeClaim:
+            claimName: nextcrm-storage
+  updateStrategy:
+    type: RollingUpdate
