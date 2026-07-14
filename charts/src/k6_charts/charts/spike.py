@@ -1,5 +1,3 @@
-"""SpikeRecoveryChart — análisis de recuperación post-pico para pruebas SPIKE."""
-
 from __future__ import annotations
 
 from typing import Any
@@ -12,8 +10,6 @@ from k6_charts.charts.base import BaseChart
 
 
 class SpikeRecoveryChart(BaseChart):
-    """3 paneles: VUs + recuperación, latencia + anotaciones, throughput."""
-
     def render(
         self,
         ts: dict[str, Any],
@@ -36,8 +32,8 @@ class SpikeRecoveryChart(BaseChart):
         self._panel_throughput_spike(axes[2], t, ts, span)
 
         fig.suptitle(
-            f"{label}  \u00b7  recuperaci\u00f3n post-pico",
-            x=0.09, ha="left", fontsize=self.theme.suptitle_size,
+            f"{label} \u2014 An\u00e1lisis de recuperaci\u00f3n post-pico",
+            fontsize=self.theme.suptitle_size,
             fontweight="bold", y=0.995,
         )
         return self.save(fig, outdir, file_id)
@@ -45,7 +41,6 @@ class SpikeRecoveryChart(BaseChart):
     def _find_recovery(
         self, vus: np.ndarray, t: np.ndarray,
     ) -> dict[str, Any]:
-        """Detecta el final del pico y el momento de recuperación."""
         vu_max = float(np.nanmax(vus))
         if vu_max <= 0:
             return {"vu_max": vu_max}
@@ -80,8 +75,8 @@ class SpikeRecoveryChart(BaseChart):
         recovery: dict[str, Any],
     ) -> None:
         ax.fill_between(t, vus, step="post", color=self.p.s4, alpha=0.16, zorder=1)
-        ax.step(t, vus, where="post", color=self.p.s4, lw=1.8, zorder=2)
-        ax.set_title("Perfil de carga (VUs)", loc="left")
+        ax.step(t, vus, where="post", color=self.p.s4, lw=self.theme.line_width, zorder=2)
+        ax.set_title("Perfil de carga (VUs)", loc="center", fontsize=9.5, pad=6)
         ax.set_ylabel("VUs")
         ax.set_ylim(bottom=0)
         ax.yaxis.set_major_locator(MaxNLocator(integer=True, nbins=5))
@@ -105,13 +100,13 @@ class SpikeRecoveryChart(BaseChart):
         self, ax: Any, t: np.ndarray, p95: np.ndarray,
         med: np.ndarray, recovery: dict[str, Any],
     ) -> None:
-        ax.plot(t, p95, color=self.p.s1, lw=2.0, label="p95")
-        ax.plot(t, med, color=self.p.s3, lw=1.5, label="mediana")
-        ax.set_title("Latencia de respuesta", loc="left")
+        ax.plot(t, p95, color=self.p.s1, lw=self.theme.line_width, label="p95")
+        ax.plot(t, med, color=self.p.s3, lw=self.theme.line_width * 0.8, label="Mediana")
+        ax.set_title("Latencia de respuesta", loc="center", fontsize=9.5, pad=6)
         ax.set_ylabel("ms")
         ax.yaxis.set_major_formatter(FuncFormatter(self.fmt_ms))
         ax.set_ylim(bottom=0)
-        ax.legend(loc="upper left", frameon=False, fontsize=9, handlelength=1.4)
+        ax.legend(loc="upper left", frameon=False, fontsize=7.5, handlelength=1.4)
         self.style_ax(ax)
 
         if recovery["vu_max"] <= 0:
@@ -149,13 +144,13 @@ class SpikeRecoveryChart(BaseChart):
         self, ax: Any, t: np.ndarray, ts: dict[str, Any], span: float,
     ) -> None:
         ax.fill_between(t, ts["rps"], color=self.p.s2, alpha=0.16, zorder=1)
-        ax.plot(t, ts["rps"], color=self.p.s2, lw=1.8, zorder=2)
-        ax.set_title("Throughput", loc="left")
+        ax.plot(t, ts["rps"], color=self.p.s2, lw=self.theme.line_width, zorder=2)
+        ax.set_title("Throughput", loc="center", fontsize=9.5, pad=6)
         ax.set_ylabel("req/s")
         ax.set_ylim(bottom=0)
         self.style_ax(ax)
         ax.xaxis.set_major_formatter(
             FuncFormatter(lambda v, _: self.fmt_time_axis(v, span))
         )
-        ax.set_xlabel("Tiempo transcurrido")
+        ax.set_xlabel("Tiempo transcurrido", fontsize=8)
         ax.set_xlim(0, t[-1])
