@@ -1,5 +1,3 @@
-"""Tables — renderizado de tablas como imagen (PNG + PDF)."""
-
 from __future__ import annotations
 
 from typing import Callable
@@ -20,22 +18,6 @@ def render_table(
     col_scale: list[float] | None = None,
     theme: Theme | None = None,
 ) -> str:
-    """Renderiza una tabla como imagen PNG (300 dpi) + PDF vectorial.
-
-    Args:
-        title: Título de la tabla.
-        headers: Lista de encabezados de columna.
-        rows: Filas de datos (cada fila es una lista de strings).
-        outdir: Directorio de salida.
-        file_id: Nombre del archivo sin extensión.
-        aligns: Alineación por columna ("left", "right", "center").
-        cell_color: Función (row_idx, col_idx, value) -> color | None.
-        col_scale: Escalado de anchos por columna.
-        theme: Tema de estilo (usa Theme() por defecto).
-
-    Returns:
-        Nombre del archivo generado.
-    """
     th = theme or Theme()
     p = th.palette
     ncol = len(headers)
@@ -115,9 +97,7 @@ def render_table(
                 cell.get_text().set_fontweight("bold")
 
     import os
-    png_path = os.path.join(outdir, file_id + ".png")
-    pdf_path = os.path.join(outdir, file_id + ".pdf")
-    fig.savefig(png_path, dpi=th.dpi)
-    fig.savefig(pdf_path)
+    svg_path = os.path.join(outdir, file_id + ".svg")
+    fig.savefig(svg_path)
     plt.close(fig)
     return file_id
