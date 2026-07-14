@@ -39,6 +39,9 @@ yarn-error.log*
 .env
 .env.test.coolify
 
+perf-reports/*.csv
+perf-reports-out
+
 # tests-adelantado
 
 # vercel
