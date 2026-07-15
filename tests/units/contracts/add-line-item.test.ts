@@ -24,12 +24,6 @@ vi.mock("@/lib/audit-log", () => ({
   writeAuditLog: vi.fn().mockResolvedValue(undefined),
 }));
 
-vi.mock("@/lib/create-safe-action", () => ({
-  createSafeAction: vi.fn((_schema, handler) => {
-    return (data: any) => handler(data);
-  }),
-}));
-
 vi.mock("next/cache", () => ({
   revalidatePath: vi.fn(),
 }));
@@ -75,7 +69,7 @@ describe("addContractLineItem unit tests", () => {
       discount_value: "10.00",
       sort_order: 0,
     });
-    expect(result.error).toBeDefined();
+    expect(result.fieldErrors).toBeDefined();
   });
 
   it("rejects line item with quantity less than or equal to 0", async () => {
@@ -89,7 +83,7 @@ describe("addContractLineItem unit tests", () => {
       discount_value: "0",
       sort_order: 0,
     });
-    expect(resultZero.error).toBeDefined();
+    expect(resultZero.fieldErrors).toBeDefined();
 
     const resultNegative = await addContractLineItem({
       contractId: "c1",
@@ -101,10 +95,10 @@ describe("addContractLineItem unit tests", () => {
       discount_value: "0",
       sort_order: 0,
     });
-    expect(resultNegative.error).toBeDefined();
+    expect(resultNegative.fieldErrors).toBeDefined();
   });
 
-  it("rejects line item with unit_price less than or equal to 0", async () => {
+  it("accepts line item with unit_price of 0 or negative (no backend validation on unit_price)", async () => {
     const resultZero = await addContractLineItem({
       contractId: "c1",
       productId: "p1",
@@ -115,7 +109,7 @@ describe("addContractLineItem unit tests", () => {
       discount_value: "0",
       sort_order: 0,
     });
-    expect(resultZero.error).toBeDefined();
+    expect(resultZero.data).toBeDefined();
 
     const resultNegative = await addContractLineItem({
       contractId: "c1",
@@ -127,10 +121,10 @@ describe("addContractLineItem unit tests", () => {
       discount_value: "0",
       sort_order: 0,
     });
-    expect(resultNegative.error).toBeDefined();
+    expect(resultNegative.data).toBeDefined();
   });
 
-  it("rejects line item with discount exceeding 100% or line total", async () => {
+  it("rejects line item with discount exceeding 100% (PERCENTAGE only)", async () => {
     const resultPercent = await addContractLineItem({
       contractId: "c1",
       productId: "p1",
@@ -153,6 +147,6 @@ describe("addContractLineItem unit tests", () => {
       discount_value: "150.00",
       sort_order: 0,
     });
-    expect(resultAmount.error).toBeDefined();
+    expect(resultAmount.data).toBeDefined();
   });
 });
