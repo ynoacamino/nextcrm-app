@@ -1,5 +1,3 @@
-"""Descubrimiento de datasets k6 en un directorio."""
-
 from __future__ import annotations
 
 import os
@@ -7,13 +5,6 @@ import re
 
 
 def normalize_name(filename: str) -> str:
-    """Normaliza el nombre de un archivo a un identificador de dataset limpio.
-
-    Patrones soportados:
-      - entity.load-raw-metrics.csv
-      - entity.stress.json
-      - PRSTRESS-entity.json
-    """
     basename = os.path.basename(filename)
 
     type_match = re.search(
@@ -58,7 +49,6 @@ def normalize_name(filename: str) -> str:
 
 
 def detect_kind(filename: str) -> str | None:
-    """Detecta el tipo de prueba (PRLOAD, PRSTRESS, etc.) desde el nombre."""
     match = re.match(
         r"^(PRLOAD|PRSPIKE|PRSTRESS|PRSOAK|PRSMOKE)",
         os.path.basename(filename),
@@ -68,7 +58,6 @@ def detect_kind(filename: str) -> str | None:
 
 
 def discover(indir: str) -> list[dict[str, object]]:
-    """Descubre archivos k6 (JSON + CSV) en un directorio y los agrupa en datasets."""
     datasets: dict[str, dict[str, object]] = {}
 
     for filename in sorted(os.listdir(indir)):
