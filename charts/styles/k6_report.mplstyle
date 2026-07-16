@@ -1,16 +1,10 @@
-# =============================================================================
-# k6_report.mplstyle — Estilos globales para reportes k6
-# =============================================================================
-# Fuente y tamaños
 font.family: DejaVu Sans
 font.size: 10.5
 
-# Figura
 figure.facecolor: white
 savefig.facecolor: white
 savefig.bbox: tight
 
-# Ejes
 axes.facecolor: white
 axes.edgecolor: #c9c8c3
 axes.linewidth: 0.8
@@ -19,16 +13,12 @@ axes.labelcolor: #52514e
 axes.titleweight: bold
 axes.titlesize: 11.5
 
-# Grid
 grid.color: #e6e5e1
 grid.linewidth: 0.8
 
-# Ticks
 xtick.color: #52514e
 ytick.color: #52514e
 
-# Texto
 text.color: #111111
 
-# SVG
 svg.fonttype: none

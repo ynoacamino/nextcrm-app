@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: nextcrm
+  namespace: ynoacamino
+  labels:
+    app: nextcrm
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: nextcrm
+
+  template:
+    metadata:
+      labels:
+        app: nextcrm
+
+    spec:
+      dnsPolicy: ClusterFirst
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
+
+      containers:
+        - name: nextcrm
+          image: ghcr.io/ynoacamino/nextcrm-app:0.3
+
+          envFrom:
+            - configMapRef:
+                name: nextcrm-config
+            - secretRef:
+                name: nextcrm-secrets
+
+          ports:
+            - name: http
+              containerPort: 3000

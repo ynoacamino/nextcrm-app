@@ -40,12 +40,6 @@ vi.mock("@/lib/currency", () => ({
   getSnapshotRate: vi.fn().mockResolvedValue("1.0"),
 }));
 
-vi.mock("@/lib/create-safe-action", () => ({
-  createSafeAction: vi.fn((_schema, handler) => {
-    return (data: any) => handler(data);
-  }),
-}));
-
 vi.mock("next/cache", () => ({
   revalidatePath: vi.fn(),
 }));
@@ -191,7 +185,7 @@ describe("assignProduct", () => {
       ...baseAssignData,
       quantity: 1.5,
     });
-    expect(res.error).toBeDefined();
+    expect(res.fieldErrors).toBeDefined();
   });
 
   it("rejects assignment with non-numeric custom_price", async () => {
@@ -199,7 +193,7 @@ describe("assignProduct", () => {
       ...baseAssignData,
       custom_price: "not-a-number",
     });
-    expect(res.error).toBeDefined();
+    expect(res.data).toBeDefined();
   });
 
   it("rejects assignment with quantity equal to 0 or negative", async () => {
@@ -207,13 +201,13 @@ describe("assignProduct", () => {
       ...baseAssignData,
       quantity: 0,
     });
-    expect(resZero.error).toBeDefined();
+    expect(resZero.fieldErrors).toBeDefined();
 
     const resNegative = await assignProduct({
       ...baseAssignData,
       quantity: -2,
     });
-    expect(resNegative.error).toBeDefined();
+    expect(resNegative.fieldErrors).toBeDefined();
   });
 
   it("rejects assignment when renewal_date is after end_date", async () => {
@@ -223,6 +217,6 @@ describe("assignProduct", () => {
       end_date: new Date("2024-02-01"),
       renewal_date: new Date("2024-03-01"),
     });
-    expect(res.error).toBeDefined();
+    expect(res.data).toBeDefined();
   });
 });

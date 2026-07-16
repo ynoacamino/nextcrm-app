@@ -16,6 +16,10 @@ vi.mock("@/lib/audit-log", () => ({
   diffObjects: vi.fn().mockReturnValue({ title: ["Old", "New"] }),
 }));
 
+vi.mock("next/cache", () => ({
+  revalidatePath: vi.fn(),
+}));
+
 vi.mock("@/lib/currency", () => ({
   getDefaultCurrency: vi.fn().mockResolvedValue("USD"),
   getSnapshotRate: vi.fn().mockResolvedValue(null),

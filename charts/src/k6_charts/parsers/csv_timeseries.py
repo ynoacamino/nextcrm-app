@@ -1,5 +1,3 @@
-"""Parser para CSV de métricas crudas k6 (series temporales)."""
-
 from __future__ import annotations
 
 import csv
@@ -11,12 +9,10 @@ import numpy as np
 
 csv.field_size_limit(10**7)
 
-# Métricas que nos interesan del CSV
 _NEEDED = {"http_req_duration", "http_reqs", "http_req_failed", "vus", "iterations"}
 
 
 def _parse_extra_tags(tags_str: str) -> dict[str, str]:
-    """Parsea 'entity=accounts&op=read&suite=PRSTRESS' a diccionario."""
     if not tags_str:
         return {}
     pairs: dict[str, str] = {}
@@ -28,17 +24,10 @@ def _parse_extra_tags(tags_str: str) -> dict[str, str]:
 
 
 def _extract_entity(tags: dict[str, str]) -> tuple[str, str]:
-    """Extrae entity y op de los tags extra."""
     return tags.get("entity", ""), tags.get("op", "")
 
 
 def parse_csv(path: str) -> dict[str, Any] | None:
-    """Parsea un CSV de métricas crudas k6 y retorna series temporales binneadas.
-
-    Returns:
-        Diccionario con arrays numpy de tiempo, p95, mediana, avg, rps, error, vus,
-        o None si no hay datos válidos.
-    """
     with open(path, newline="") as fh:
         reader = csv.reader(fh)
         header = next(reader)

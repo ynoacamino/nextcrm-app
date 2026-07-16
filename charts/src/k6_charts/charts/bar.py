@@ -1,5 +1,3 @@
-"""Bar charts — barras horizontales, agrupadas y por acción."""
-
 from __future__ import annotations
 
 from typing import Any, Callable
@@ -12,8 +10,6 @@ from k6_charts.charts.base import BaseChart
 
 
 class HorizontalBarChart(BaseChart):
-    """Barras horizontales para comparativas (p95, RPS, errores)."""
-
     def render(
         self,
         title: str,
@@ -24,7 +20,6 @@ class HorizontalBarChart(BaseChart):
         outdir: str = ".",
         file_id: str = "hbar",
     ) -> str | None:
-        """Genera barras horizontales comparativas."""
         if not items:
             return None
 
@@ -71,12 +66,12 @@ class HorizontalBarChart(BaseChart):
         ax.tick_params(length=0)
 
         fig.suptitle(
-            title, x=0.02, ha="left",
+            title,
             fontsize=self.theme.suptitle_size, fontweight="bold", y=0.98,
         )
         if subtitle:
             ax.set_title(
-                subtitle, loc="left", fontsize=9.5,
+                subtitle, loc="center", fontsize=9,
                 fontweight="normal", color=self.p.muted,
             )
 
@@ -84,7 +79,7 @@ class HorizontalBarChart(BaseChart):
 
 
 class GroupedBarChart(BaseChart):
-    """Barras agrupadas para comparar percentiles entre pruebas."""
+    MAX_LATENCY_MS = 60000.0
 
     def render(
         self,
@@ -92,123 +87,64 @@ class GroupedBarChart(BaseChart):
         outdir: str,
         file_id: str = "grouped",
     ) -> str | None:
-        """Genera barras agrupadas de latencia por percentil."""
+        if not tests:
+            return None
+
         groups = [
-            ("dur_med", "mediana", self.p.s2),
-            ("dur_p90", "p90", self.p.s1),
-            ("dur_p95", "p95", self.p.s3),
-            ("dur_max", "m\u00e1x", self.p.s4),
+            ("dur_med", "Mediana", self.p.s2),
+            ("dur_p90", "P90", self.p.s1),
+            ("dur_p95", "P95", self.p.s3),
+            ("dur_max", "M\u00e1x", self.p.s4),
         ]
+
+        mid = (len(tests) + 1) // 2
+        chunk_left = tests[:mid]
+        chunk_right = tests[mid:]
+
+        fig, axes = plt.subplots(
+            2, 1, figsize=(12.0, 7.0),
+            gridspec_kw={"left": 0.10, "right": 0.97, "top": 0.90, "bottom": 0.08, "hspace": 0.45},
+        )
+
+        for ax, chunk, x_off in [(axes[0], chunk_left, 0), (axes[1], chunk_right, 0)]:
+            if not chunk:
+                ax.axis("off")
+                continue
+            self._render_bars(ax, chunk, groups, x_off)
+
+        fig.suptitle(
+            "Percentiles de latencia por prueba (http_req_duration)",
+            fontsize=self.theme.suptitle_size,
+            fontweight="bold", y=0.97,
+        )
+        return self.save(fig, outdir, file_id)
+
+    def _render_bars(
+        self, ax: Any, tests: list[dict[str, Any]],
+        groups: list[tuple[str, str, str]], x_off: int,
+    ) -> None:
         n = len(tests)
         g = len(groups)
         bw = 0.8 / g
-
-        fig, ax = plt.subplots(
-            figsize=(9.2, 4.2),
-            gridspec_kw={"left": 0.09, "right": 0.975, "top": 0.86, "bottom": 0.12},
-        )
-
         x = np.arange(n)
+
         for gi, (key, lbl, col) in enumerate(groups):
-            vals = [t["s"].get(key) or 0 for t in tests]
+            vals = [min(t["s"].get(key) or 0, self.MAX_LATENCY_MS) for t in tests]
             ax.bar(
-                x + (gi - (g - 1) / 2) * bw, vals, bw * 0.92,
+                x + (gi - (g - 1) / 2) * bw, vals, bw * 0.90,
                 label=lbl, color=col, zorder=2,
             )
 
         ax.set_xticks(x)
-        ax.set_xticklabels([t["label"] for t in tests])
+        ax.set_xticklabels(
+            [t["label"] for t in tests],
+            fontsize=7.5, rotation=35, ha="right", rotation_mode="anchor",
+        )
         ax.yaxis.set_major_formatter(FuncFormatter(self.fmt_ms))
-        ax.set_ylabel("Latencia")
+        ax.set_ylabel("Latencia", fontsize=8)
+        ax.set_ylim(top=self.MAX_LATENCY_MS * 1.1)
         ax.legend(
-            ncol=4, frameon=False, fontsize=9.5, loc="upper left",
-            bbox_to_anchor=(0, 1.14),
+            ncol=4, frameon=False, fontsize=8, loc="upper left",
+            bbox_to_anchor=(0, 1.08),
         )
         self.style_ax(ax)
-        fig.suptitle(
-            "Latencia por percentil y por prueba (http_req_duration)",
-            x=0.09, ha="left", fontsize=self.theme.suptitle_size,
-            fontweight="bold", y=0.98,
-        )
-        return self.save(fig, outdir, file_id)
-
-
-class PerActionChart(BaseChart):
-    """Barras agrupadas de latencia por Server Action (operación)."""
-
-    def render(
-        self,
-        ts: dict[str, Any],
-        label: str,
-        outdir: str,
-        file_id: str = "per-action",
-    ) -> str | None:
-        """Genera barras de latencia por operación."""
-        action_dur = ts.get("per_action_dur", {})
-        if not action_dur:
-            return None
-
-        OP_LABELS = {
-            "read": "Lectura", "write": "Escritura", "create": "Crear",
-            "update": "Actualizar", "delete": "Eliminar", "complex": "Compleja",
-        }
-
-        items: list[tuple[str, dict[str, float]]] = []
-        for action, durs in sorted(action_dur.items()):
-            arr = np.array(durs)
-            entity, op = action.split(":", 1) if ":" in action else (action, "")
-            op_label = OP_LABELS.get(op, op)
-            display = f"{entity} ({op_label})" if op_label else entity
-            items.append((display, {
-                "med": float(np.percentile(arr, 50)),
-                "p90": float(np.percentile(arr, 90)),
-                "p95": float(np.percentile(arr, 95)),
-                "p99": float(np.percentile(arr, 99)),
-                "max": float(arr.max()),
-                "count": len(arr),
-            }))
-
-        if not items:
-            return None
-
-        items.sort(key=lambda x: x[1]["p95"])
-
-        groups = [
-            ("med", "mediana", self.p.s2),
-            ("p90", "p90", self.p.s1),
-            ("p95", "p95", self.p.s3),
-            ("p99", "p99", self.p.crit),
-        ]
-        n = len(items)
-        g = len(groups)
-        bw = 0.8 / g
-
-        fig, ax = plt.subplots(
-            figsize=(9.2, max(4.0, 0.55 * n + 0.8)),
-            gridspec_kw={"left": 0.28, "right": 0.95, "top": 0.88, "bottom": 0.10},
-        )
-
-        x = np.arange(n)
-        for gi, (key, lbl, col) in enumerate(groups):
-            vals = [it[1][key] for it in items]
-            ax.bar(
-                x + (gi - (g - 1) / 2) * bw, vals, bw * 0.88,
-                label=lbl, color=col, zorder=2,
-            )
-
-        ax.set_xticks(x)
-        ax.set_xticklabels([it[0] for it in items], fontsize=9)
-        ax.yaxis.set_major_formatter(FuncFormatter(self.fmt_ms))
-        ax.set_ylabel("Latencia")
-        ax.legend(
-            ncol=4, frameon=False, fontsize=9.5, loc="upper left",
-            bbox_to_anchor=(0, 1.12),
-        )
-        self.style_ax(ax)
-        ax.set_xlim(-0.5, n - 0.5)
-        fig.suptitle(
-            f"{label}  \u00b7  latencia por operaci\u00f3n (Server Action)",
-            x=0.04, ha="left", fontsize=self.theme.suptitle_size,
-            fontweight="bold", y=0.98,
-        )
-        return self.save(fig, outdir, file_id)

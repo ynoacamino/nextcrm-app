@@ -1,5 +1,3 @@
-"""CdfChart — distribución de latencia (percentiles)."""
-
 from __future__ import annotations
 
 import numpy as np
@@ -10,8 +8,6 @@ from k6_charts.charts.base import BaseChart
 
 
 class CdfChart(BaseChart):
-    """Gráfica de distribución acumulada de latencia con percentiles clave."""
-
     def render(
         self,
         all_dur: np.ndarray,
@@ -19,7 +15,6 @@ class CdfChart(BaseChart):
         outdir: str,
         file_id: str,
     ) -> str | None:
-        """Genera la CDF de latencia. Retorna el nombre del archivo o None."""
         if all_dur.size == 0:
             return None
 
@@ -50,11 +45,11 @@ class CdfChart(BaseChart):
             )
 
         ax.set_title(
-            f"{label}  \u00b7  distribuci\u00f3n de latencia (percentiles)",
-            loc="left", fontsize=12,
+            f"{label} \u2014 Distribuci\u00f3n de latencia (CDF)",
+            loc="center", fontsize=11, pad=8,
         )
-        ax.set_xlabel("Percentil de las peticiones")
-        ax.set_ylabel("Latencia")
+        ax.set_xlabel("Percentil", fontsize=8)
+        ax.set_ylabel("Latencia", fontsize=8)
         ax.yaxis.set_major_formatter(FuncFormatter(self.fmt_ms))
         ax.set_xlim(0, 100)
         ax.set_ylim(bottom=0)

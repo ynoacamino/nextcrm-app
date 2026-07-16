@@ -1,5 +1,3 @@
-"""Theme — configuración centralizada de colores, fuentes y tamaños."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -8,8 +6,6 @@ from pathlib import Path
 
 @dataclass(frozen=True)
 class Palette:
-    """Paleta de colores validada y accessible (colorblind-safe)."""
-
     surface: str = "#fcfcfb"
     panel: str = "#ffffff"
     zebra: str = "#f7f6f3"
@@ -29,31 +25,29 @@ class Palette:
     crit: str = "#cf2f2f"
 
     def as_dict(self) -> dict[str, str]:
-        """Devuelve la paleta como diccionario plano."""
         return {k: getattr(self, k) for k in self.__dataclass_fields__}
 
 
 @dataclass(frozen=True)
 class Theme:
-    """Configuración completa de estilo para los reportes."""
-
     palette: Palette = field(default_factory=Palette)
     font_family: str = "DejaVu Sans"
-    font_size: float = 10.5
-    title_size: float = 11.5
-    suptitle_size: float = 13.0
-    label_size: float = 9.5
-    axis_linewidth: float = 0.8
-    grid_linewidth: float = 0.8
-    tick_length: float = 3.0
-    line_width: float = 2.0
-    marker_size: float = 6.0
-    default_figsize: tuple[float, float] = (9.2, 6.0)
+    font_size: float = 10.0
+    title_size: float = 11.0
+    suptitle_size: float = 12.0
+    label_size: float = 9.0
+    axis_linewidth: float = 0.6
+    grid_linewidth: float = 0.5
+    tick_length: float = 2.5
+    line_width: float = 1.8
+    marker_size: float = 5.0
+    default_figsize: tuple[float, float] = (7.0, 5.0)
     dpi: int = 300
     style_file: str = "k6_report.mplstyle"
+    title_ha: str = "center"
+    suptitle_ha: str = "center"
 
     def apply_rcparams(self) -> None:
-        """Aplica la configuración al global rcParams de matplotlib."""
         import matplotlib
         matplotlib.use("Agg")
 
@@ -78,11 +72,14 @@ class Theme:
             "text.color": p.ink,
             "axes.titleweight": "bold",
             "axes.titlesize": self.title_size,
+            "axes.titlepad": 8.0,
+            "figure.titleweight": "bold",
             "svg.fonttype": "none",
+            "pdf.fonttype": 42,
+            "ps.fonttype": 42,
         })
 
     def style_file_path(self) -> Path | None:
-        """Busca el archivo .mplstyle en ubicaciones conocidas."""
         candidates = [
             Path(__file__).parent.parent.parent / "styles" / self.style_file,
             Path.home() / ".config" / "k6_charts" / self.style_file,
@@ -94,5 +91,4 @@ class Theme:
 
 
 def get_default_theme() -> Theme:
-    """Retorna el tema por defecto."""
     return Theme()

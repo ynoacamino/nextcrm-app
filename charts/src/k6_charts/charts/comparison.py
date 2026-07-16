@@ -1,5 +1,3 @@
-"""CrossComparisonChart — dashboard comparativo LOAD vs STRESS vs SPIKE vs SOAK."""
-
 from __future__ import annotations
 
 from collections import defaultdict
@@ -13,8 +11,6 @@ from k6_charts.charts.base import BaseChart
 
 
 class CrossComparisonChart(BaseChart):
-    """Dashboard 2x2 comparando métricas entre tipos de prueba."""
-
     KIND_ORDER = ["PRLOAD", "PRSTRESS", "PRSPIKE", "PRSOAK"]
     KIND_LABELS = {"PRLOAD": "LOAD", "PRSTRESS": "STRESS", "PRSPIKE": "SPIKE", "PRSOAK": "SOAK"}
 
@@ -24,7 +20,6 @@ class CrossComparisonChart(BaseChart):
         outdir: str,
         file_id: str = "cross-comparison",
     ) -> str | None:
-        """Genera dashboard comparativo. Retorna nombre del archivo o None."""
         by_kind: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for t in results:
             k = t.get("kind")
@@ -54,7 +49,7 @@ class CrossComparisonChart(BaseChart):
 
         fig.suptitle(
             "Comparativa cross-tipo de pruebas de rendimiento",
-            x=0.09, ha="left", fontsize=self.theme.suptitle_size,
+            fontsize=self.theme.suptitle_size,
             fontweight="bold", y=0.995,
         )
         return self.save(fig, outdir, file_id)
@@ -72,7 +67,7 @@ class CrossComparisonChart(BaseChart):
             )
         ax.set_xticks(range(len(present)))
         ax.set_xticklabels([self.KIND_LABELS[k] for k in present])
-        ax.set_title("Latencia p95 promedio", loc="left")
+        ax.set_title("Latencia p95 promedio", loc="center", fontsize=9.5, pad=6)
         ax.set_ylabel("ms")
         ax.yaxis.set_major_formatter(FuncFormatter(self.fmt_ms))
         ax.set_ylim(bottom=0)
@@ -91,7 +86,7 @@ class CrossComparisonChart(BaseChart):
             )
         ax.set_xticks(range(len(present)))
         ax.set_xticklabels([self.KIND_LABELS[k] for k in present])
-        ax.set_title("Throughput promedio", loc="left")
+        ax.set_title("Throughput promedio", loc="center", fontsize=9.5, pad=6)
         ax.set_ylabel("req/s")
         ax.set_ylim(bottom=0)
         self.style_ax(ax)
@@ -115,7 +110,7 @@ class CrossComparisonChart(BaseChart):
             )
         ax.set_xticks(range(len(present)))
         ax.set_xticklabels([self.KIND_LABELS[k] for k in present])
-        ax.set_title("Tasa de error promedio", loc="left")
+        ax.set_title("Tasa de error promedio", loc="center", fontsize=9.5, pad=6)
         ax.set_ylabel("%")
         ax.set_ylim(bottom=0)
         self.style_ax(ax)
@@ -134,7 +129,7 @@ class CrossComparisonChart(BaseChart):
             )
         ax.set_xticks(range(len(present)))
         ax.set_xticklabels([self.KIND_LABELS[k] for k in present])
-        ax.set_title("VUs m\u00e1ximos alcanzados", loc="left")
+        ax.set_title("VUs m\u00e1ximos alcanzados", loc="center", fontsize=9.5, pad=6)
         ax.set_ylabel("VUs")
         ax.yaxis.set_major_locator(MaxNLocator(integer=True, nbins=5))
         ax.set_ylim(bottom=0)

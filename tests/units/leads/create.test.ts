@@ -173,7 +173,7 @@ describe("createLead", () => {
       id: "l1",
     });
     await createLead({ last_name: "Doe" });
-    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/(routes)/crm/leads", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/crm/leads", "page");
   });
 
   it("returns error on prisma failure", async () => {

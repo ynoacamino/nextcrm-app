@@ -1,5 +1,3 @@
-"""Parser para el resumen JSON de k6 (handleSummary)."""
-
 from __future__ import annotations
 
 import json
@@ -7,7 +5,6 @@ from typing import Any
 
 
 def _metric_value(metric: dict[str, Any] | None, stat: str) -> float | None:
-    """Extrae un valor de una métrica k6 (soporta formato rich y aplanado)."""
     if not metric:
         return None
     if isinstance(metric.get("values"), dict) and stat in metric["values"]:
@@ -18,7 +15,6 @@ def _metric_value(metric: dict[str, Any] | None, stat: str) -> float | None:
 
 
 def _flatten_checks(root: dict[str, Any] | None) -> list[dict[str, Any]]:
-    """Extrae recursivamente todos los checks del árbol de grupos k6."""
     rows: list[dict[str, Any]] = []
 
     def walk(group: dict[str, Any] | None) -> None:
@@ -44,11 +40,6 @@ def _flatten_checks(root: dict[str, Any] | None) -> list[dict[str, Any]]:
 
 
 def parse_summary(path: str | None) -> dict[str, Any] | None:
-    """Parsea el JSON de resumen de k6 y retorna un diccionario normalizado.
-
-    Returns:
-        Diccionario con métricas normalizadas, o None si falla el parsing.
-    """
     if not path:
         return None
 

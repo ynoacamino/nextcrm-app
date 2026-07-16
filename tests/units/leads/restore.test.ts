@@ -97,8 +97,8 @@ describe("restoreLead", () => {
       id: "l1",
     });
     await restoreLead("l1");
-    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/(routes)/crm/leads", "page");
-    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/(routes)/admin/audit-log", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/crm/leads", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/admin/audit-log", "page");
   });
 
   it("returns { success: true } on success", async () => {

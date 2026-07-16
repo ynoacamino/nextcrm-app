@@ -39,6 +39,9 @@ yarn-error.log*
 .env
 .env.test.coolify
 
+perf-reports/*.csv
+perf-reports-out
+
 # tests-adelantado
 
 # vercel
@@ -53,6 +56,9 @@ migration-errors.log
 
 # backups
 backups/
+
+# kubernetes secrets (use SOPS-encrypted secret.enc.yaml instead)
+kube/secrets/secret.yaml
 
 #Agents
 .claude/

@@ -1,5 +1,3 @@
-"""Paleta de colores y helpers para gráficas k6."""
-
 from __future__ import annotations
 
 from k6_charts.config import Palette
@@ -8,7 +6,6 @@ _DEFAULT_PALETTE: Palette | None = None
 
 
 def get_palette() -> Palette:
-    """Retorna la paleta por defecto (singleton lazy)."""
     global _DEFAULT_PALETTE
     if _DEFAULT_PALETTE is None:
         _DEFAULT_PALETTE = Palette()
@@ -16,7 +13,6 @@ def get_palette() -> Palette:
 
 
 def error_color(err_rate: float, palette: Palette | None = None) -> str:
-    """Selecciona color según tasa de error: good/warn/crit."""
     p = palette or get_palette()
     if err_rate <= 0.5:
         return p.good
@@ -26,7 +22,6 @@ def error_color(err_rate: float, palette: Palette | None = None) -> str:
 
 
 def threshold_color(value: float, threshold: float, palette: Palette | None = None) -> str:
-    """Retorna color de OK/CRIT si value supera threshold."""
     p = palette or get_palette()
     return p.good if value <= threshold else p.crit
 

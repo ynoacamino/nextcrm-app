@@ -11,6 +11,10 @@ vi.mock("@/lib/prisma", () => ({
   },
 }));
 
+vi.mock("next/cache", () => ({
+  revalidatePath: vi.fn(),
+}));
+
 vi.mock("@/lib/audit-log", () => ({
   writeAuditLog: vi.fn().mockResolvedValue(undefined),
 }));

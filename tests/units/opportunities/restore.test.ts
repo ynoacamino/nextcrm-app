@@ -91,8 +91,8 @@ describe("restoreOpportunity", () => {
     const { revalidatePath } = await import("next/cache");
     (prismadb.crm_Opportunities.update as ReturnType<typeof vi.fn>).mockResolvedValue({ id: "o1" });
     await restoreOpportunity("o1");
-    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/(routes)/crm/opportunities", "page");
-    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/(routes)/admin/audit-log", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/crm/opportunities", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/admin/audit-log", "page");
   });
 
   it("returns { success: true } on success", async () => {

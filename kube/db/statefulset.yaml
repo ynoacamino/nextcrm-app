@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefulSet
+
+metadata:
+  name: nextcrm-db
+  namespace: ynoacamino
+  labels:
+    app: nextcrm-db
+
+spec:
+  serviceName: nextcrm-db
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcrm-db
+  template:
+    metadata:
+      labels:
+        app: nextcrm-db
+    spec:
+      containers:
+        - name: postgres
+          image: pgvector/pgvector:pg17
+          args:
+            - postgres
+            - -c
+            - max_connections=200
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: nextcrm-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nextcrm-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: nextcrm-secrets
+                  key: POSTGRES_DB
+          ports:
+            - name: postgres
+              containerPort: 5432
+          volumeMounts:
+            - name: db-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: db-data
+          persistentVolumeClaim:
+            claimName: nextcrm-db-data
+  updateStrategy:
+    type: RollingUpdate

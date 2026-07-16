@@ -52,6 +52,7 @@ describe("createTask", () => {
         send: vi.fn().mockResolvedValue({}),
       },
     });
+    (prismadb.accountWatchers.findMany as ReturnType<typeof vi.fn>).mockResolvedValue([]);
   });
 
   it("unauthenticated returns Unauthorized error", async () => {

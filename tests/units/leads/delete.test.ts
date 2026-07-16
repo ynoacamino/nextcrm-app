@@ -81,7 +81,7 @@ describe("deleteLead", () => {
       id: "l1",
     });
     await deleteLead("l1");
-    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/(routes)/crm/leads", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/crm/leads", "page");
   });
 
   it("returns { success: true } on success", async () => {
