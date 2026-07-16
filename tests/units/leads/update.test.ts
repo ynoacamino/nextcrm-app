@@ -140,7 +140,7 @@ describe("updateLead", () => {
       id: "l1",
     });
     await updateLead({ id: "l1", lastName: "Smith" });
-    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/(routes)/crm/leads", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/crm/leads", "page");
   });
 
   it("returns error on prisma failure", async () => {
