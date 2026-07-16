@@ -57,6 +57,9 @@ migration-errors.log
 # backups
 backups/
 
+# kubernetes secrets (use SOPS-encrypted secret.enc.yaml instead)
+kube/secrets/secret.yaml
+
 #Agents
 .claude/
 .agents/
