@@ -75,7 +75,7 @@ describe("deleteOpportunity", () => {
     const { revalidatePath } = await import("next/cache");
     (prismadb.crm_Opportunities.update as ReturnType<typeof vi.fn>).mockResolvedValue({ id: "o1" });
     await deleteOpportunity("o1");
-    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/(routes)/crm/opportunities", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/crm/opportunities", "page");
   });
 
   it("returns { success: true } on success", async () => {

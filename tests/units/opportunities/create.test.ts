@@ -147,7 +147,7 @@ describe("createOpportunity", () => {
     const { revalidatePath } = await import("next/cache");
     (prismadb.crm_Opportunities.create as ReturnType<typeof vi.fn>).mockResolvedValue({ id: "o1" });
     await createOpportunity({ name: "Op" });
-    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/(routes)/crm/opportunities", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/crm/opportunities", "page");
   });
 
   it("returns error on prisma failure", async () => {

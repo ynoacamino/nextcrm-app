@@ -140,7 +140,7 @@ describe("updateOpportunity", () => {
     (prismadb.crm_Opportunities.findUnique as ReturnType<typeof vi.fn>).mockResolvedValue({ id: "o1" });
     (prismadb.crm_Opportunities.update as ReturnType<typeof vi.fn>).mockResolvedValue({ id: "o1" });
     await updateOpportunity({ id: "o1", name: "New" });
-    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/(routes)/crm/opportunities", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/[locale]/crm/opportunities", "page");
   });
 
   it("returns error on prisma failure", async () => {
