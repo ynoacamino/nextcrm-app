@@ -1,0 +1,201 @@
+{
+    "metrics": {
+        "http_req_duration": {
+            "avg": 22.965761322444298,
+            "min": 6.741145,
+            "med": 18.399245,
+            "max": 251.157696,
+            "p(90)": 41.141965,
+            "p(95)": 50.75054529999993
+        },
+        "http_req_waiting": {
+            "avg": 22.803205973825285,
+            "min": 6.611832,
+            "med": 18.229855,
+            "max": 251.013321,
+            "p(90)": 40.9984937,
+            "p(95)": 50.622654899999944
+        },
+        "group_duration": {
+            "p(95)": 51.2341268,
+            "avg": 23.455429135274425,
+            "min": 7.11519,
+            "med": 18.8967,
+            "max": 251.645122,
+            "p(90)": 41.6357184
+        },
+        "crm_ttfb": {
+            "p(95)": 50.6039282,
+            "avg": 22.800529647616656,
+            "min": 6.611832,
+            "med": 18.229763,
+            "max": 251.013321,
+            "p(90)": 40.9941534
+        },
+        "vus_max": {
+            "min": 15,
+            "max": 15,
+            "value": 15
+        },
+        "crm_operations": {
+            "count": 19405,
+            "rate": 21.55179238643848
+        },
+        "http_req_connecting": {
+            "avg": 0.000326212644270404,
+            "min": 0,
+            "med": 0,
+            "max": 0.834829,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "data_sent": {
+            "count": 10681530,
+            "rate": 11863.237151739973
+        },
+        "crm_error_rate": {
+            "passes": 0,
+            "fails": 19405,
+            "value": 0
+        },
+        "http_req_duration{expected_response:true}": {
+            "p(95)": 50.75054529999993,
+            "avg": 22.965761322444298,
+            "min": 6.741145,
+            "med": 18.399245,
+            "max": 251.157696,
+            "p(90)": 41.141965
+        },
+        "data_received": {
+            "count": 14632730,
+            "rate": 16251.561917382629
+        },
+        "crm_response_time": {
+            "p(95)": 50.722131599999976,
+            "avg": 22.963038717289304,
+            "min": 6.741145,
+            "med": 18.398988,
+            "max": 251.157696,
+            "p(90)": 41.13046440000001
+        },
+        "http_req_failed{op:write}": {
+            "passes": 0,
+            "fails": 19405,
+            "thresholds": {
+                "rate<0.02": false
+            },
+            "value": 0
+        },
+        "http_req_tls_handshaking": {
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0
+        },
+        "http_req_blocked": {
+            "avg": 0.007881312396949808,
+            "min": 0.001941,
+            "med": 0.006094499999999999,
+            "max": 13.05538,
+            "p(90)": 0.00792,
+            "p(95)": 0.009121299999999995
+        },
+        "checks": {
+            "fails": 0,
+            "passes": 38810,
+            "thresholds": {
+                "rate>0.99": false
+            },
+            "value": 1
+        },
+        "http_req_failed": {
+            "passes": 0,
+            "fails": 19408,
+            "value": 0
+        },
+        "http_req_sending": {
+            "avg": 0.051384868301731314,
+            "min": 0.012539,
+            "med": 0.0436715,
+            "max": 6.360024,
+            "p(90)": 0.0624896,
+            "p(95)": 0.07369654999999993
+        },
+        "iterations": {
+            "count": 19405,
+            "rate": 21.55179238643848
+        },
+        "http_req_receiving": {
+            "p(95)": 0.16921295,
+            "avg": 0.11117048031739477,
+            "min": 0.025214,
+            "med": 0.1004915,
+            "max": 10.132332,
+            "p(90)": 0.14124799999999998
+        },
+        "vus": {
+            "max": 15,
+            "value": 1,
+            "min": 1
+        },
+        "http_reqs": {
+            "count": 19408,
+            "rate": 21.55512427910322
+        },
+        "http_req_duration{op:write}": {
+            "avg": 22.963038717289304,
+            "min": 6.741145,
+            "med": 18.398988,
+            "max": 251.157696,
+            "p(90)": 41.13046440000001,
+            "p(95)": 50.722131599999976,
+            "thresholds": {
+                "p(95)<2500": false,
+                "p(99)<4000": false
+            }
+        },
+        "iteration_duration": {
+            "min": 124.146063,
+            "med": 519.721106,
+            "max": 752.293496,
+            "p(90)": 542.4366835,
+            "p(95)": 552.3216002500001,
+            "avg": 524.2203756443865
+        }
+    },
+    "setup_data": {
+        "cookie": "better-auth.session_token=5nKRZfr71vyXDLKDV5dYZEiMCIt1zVTU.NEhDmzO6CCowHLvsxwU6k12D1eZfA6bbNgzky55wvFs%3D"
+    },
+    "root_group": {
+        "checks": {},
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {
+                "PRSTRESS-006 creación de actividad bajo saturación": {
+                    "path": "::PRSTRESS-006 creación de actividad bajo saturación",
+                    "id": "29883f9b84e5fbf6c3812e1ebbe008a4",
+                    "groups": {},
+                    "checks": {
+                            "createActivity: status 2xx/3xx": {
+                                "passes": 19405,
+                                "fails": 0,
+                                "name": "createActivity: status 2xx/3xx",
+                                "path": "::PRSTRESS-006 creación de actividad bajo saturación::createActivity: status 2xx/3xx",
+                                "id": "253ced4c7a11d58b73c9eb37b6fe0ee3"
+                            },
+                            "createActivity: sin error de servidor": {
+                                "name": "createActivity: sin error de servidor",
+                                "path": "::PRSTRESS-006 creación de actividad bajo saturación::createActivity: sin error de servidor",
+                                "id": "687955f63b3ebfbe951e5e32c5353ab7",
+                                "passes": 19405,
+                                "fails": 0
+                            }
+                        },
+                    "name": "PRSTRESS-006 creación de actividad bajo saturación"
+                }
+            }
+    }
+}

@@ -1,0 +1,267 @@
+{
+    "metrics": {
+        "http_req_duration": {
+            "med": 5988.926476,
+            "max": 33530.097456,
+            "p(90)": 8256.011989,
+            "p(95)": 12619.44196,
+            "avg": 5754.273050586358,
+            "min": 0
+        },
+        "crm_ttfb": {
+            "avg": 1275.5672915669772,
+            "min": 0,
+            "med": 765.146913,
+            "max": 9355.744508,
+            "p(90)": 3004.5953013,
+            "p(95)": 3710.75690495
+        },
+        "http_req_waiting": {
+            "avg": 1273.1298740172083,
+            "min": 0,
+            "med": 761.888009,
+            "max": 9355.744508,
+            "p(90)": 3004.467534,
+            "p(95)": 3710.7095915
+        },
+        "iteration_duration": {
+            "avg": 24002.96820426983,
+            "min": 150.159964,
+            "med": 25210.570629499998,
+            "max": 62032.888943,
+            "p(90)": 38589.9560815,
+            "p(95)": 44582.21913454999
+        },
+        "crm_response_time": {
+            "p(95)": 12625.258573899995,
+            "avg": 5765.622877833547,
+            "min": 0,
+            "med": 5993.172431499999,
+            "max": 33530.097456,
+            "p(90)": 8256.2838505
+        },
+        "crm_error_rate": {
+            "passes": 0,
+            "fails": 1508,
+            "value": 0
+        },
+        "data_sent": {
+            "count": 315156,
+            "rate": 517.6276586396721
+        },
+        "vus_max": {
+            "value": 15,
+            "min": 15,
+            "max": 15
+        },
+        "http_req_duration{op:read}": {
+            "med": 5993.172431499999,
+            "max": 33530.097456,
+            "p(90)": 8256.2838505,
+            "p(95)": 12625.258573899995,
+            "avg": 5765.622877833546,
+            "min": 0,
+            "thresholds": {
+                "p(95)<1500": true,
+                "p(99)<3000": true
+            }
+        },
+        "http_req_failed{op:read}": {
+            "passes": 274,
+            "fails": 1234,
+            "thresholds": {
+                "rate<0.01": true
+            },
+            "value": 0.1816976127320955
+        },
+        "http_reqs": {
+            "count": 1511,
+            "rate": 2.4817404466503716
+        },
+        "crm_operations": {
+            "count": 1508,
+            "rate": 2.4768130996351823
+        },
+        "http_req_failed": {
+            "passes": 274,
+            "fails": 1237,
+            "value": 0.1813368630046327
+        },
+        "checks": {
+            "passes": 2742,
+            "fails": 274,
+            "thresholds": {
+                "rate>0.99": true
+            },
+            "value": 0.9091511936339522
+        },
+        "http_req_duration{expected_response:true}": {
+            "p(95)": 12737.6668992,
+            "avg": 6758.649642997564,
+            "min": 14.48125,
+            "med": 6201.306023,
+            "max": 28865.477823,
+            "p(90)": 8409.204835
+        },
+        "iterations": {
+            "count": 377,
+            "rate": 0.6192032749087956
+        },
+        "http_req_receiving": {
+            "avg": 4460.620017358047,
+            "min": 0,
+            "med": 4587.048368,
+            "max": 27079.941284,
+            "p(90)": 6813.261087,
+            "p(95)": 8522.0511625
+        },
+        "http_req_blocked": {
+            "max": 1.898998,
+            "p(90)": 0.007812,
+            "p(95)": 0.0102755,
+            "avg": 0.021759996690933127,
+            "min": 0,
+            "med": 0.005377
+        },
+        "http_req_connecting": {
+            "med": 0,
+            "max": 1.807757,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0.01096399470549305,
+            "min": 0
+        },
+        "http_req_tls_handshaking": {
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0
+        },
+        "group_duration": {
+            "max": 33531.560105,
+            "p(90)": 8256.556486899999,
+            "p(95)": 12625.751337699994,
+            "avg": 5766.281613635282,
+            "min": 0.219241,
+            "med": 5993.466185
+        },
+        "data_received": {
+            "count": 2911288435,
+            "rate": 4781642.793517512
+        },
+        "http_req_sending": {
+            "avg": 20.523159211118454,
+            "min": 0,
+            "med": 0.028382,
+            "max": 7729.931412,
+            "p(90)": 0.046868,
+            "p(95)": 0.0603145
+        },
+        "vus": {
+            "value": 2,
+            "min": 2,
+            "max": 15
+        }
+    },
+    "setup_data": {
+        "cookie": "better-auth.session_token=z88b5xKx3gEpQBrIqW7tTIp6ddiRBjXN.7wNr2AnyZwXMjx89ewE42sadUbSMi0Kl2wWxlNm4%2BeQ%3D"
+    },
+    "root_group": {
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {
+            "PRLOAD-001/002/003 listado paginado": {
+                "name": "PRLOAD-001/002/003 listado paginado",
+                "path": "::PRLOAD-001/002/003 listado paginado",
+                "id": "9d6e1debef81dfaedeba12fea03a852a",
+                "groups": {},
+                "checks": {
+                        "GET /crm/accounts: status 200": {
+                            "id": "c99b424adf9805d1e2218130d8555818",
+                            "passes": 317,
+                            "fails": 60,
+                            "name": "GET /crm/accounts: status 200",
+                            "path": "::PRLOAD-001/002/003 listado paginado::GET /crm/accounts: status 200"
+                        },
+                        "GET /crm/accounts: sin error de servidor": {
+                            "id": "8d5f586b21e7c3ef517f8d7bf4e876d9",
+                            "passes": 377,
+                            "fails": 0,
+                            "name": "GET /crm/accounts: sin error de servidor",
+                            "path": "::PRLOAD-001/002/003 listado paginado::GET /crm/accounts: sin error de servidor"
+                        }
+                    }
+            },
+            "PRLOAD-025 paginación (página 2)": {
+                "name": "PRLOAD-025 paginación (página 2)",
+                "path": "::PRLOAD-025 paginación (página 2)",
+                "id": "daa071f07cf919c3afc538d6a0999b04",
+                "groups": {},
+                "checks": {
+                        "GET /crm/accounts: status 200": {
+                            "name": "GET /crm/accounts: status 200",
+                            "path": "::PRLOAD-025 paginación (página 2)::GET /crm/accounts: status 200",
+                            "id": "17a9629303a5c88bdc68472c74911ff8",
+                            "passes": 312,
+                            "fails": 65
+                        },
+                        "GET /crm/accounts: sin error de servidor": {
+                            "name": "GET /crm/accounts: sin error de servidor",
+                            "path": "::PRLOAD-025 paginación (página 2)::GET /crm/accounts: sin error de servidor",
+                            "id": "b116fc024417ad5e4d9060d44e4ee005",
+                            "passes": 377,
+                            "fails": 0
+                        }
+                    }
+            },
+            "PRLOAD-023 ordenación por nombre": {
+                "checks": {
+                    "GET /crm/accounts: status 200": {
+                        "name": "GET /crm/accounts: status 200",
+                        "path": "::PRLOAD-023 ordenación por nombre::GET /crm/accounts: status 200",
+                        "id": "e0f13bbd7e7336c57ac34dc5aa0bc1c0",
+                        "passes": 303,
+                        "fails": 74
+                    },
+                    "GET /crm/accounts: sin error de servidor": {
+                        "fails": 0,
+                        "name": "GET /crm/accounts: sin error de servidor",
+                        "path": "::PRLOAD-023 ordenación por nombre::GET /crm/accounts: sin error de servidor",
+                        "id": "6a3e8fa3757f1344e96ef94b688b522e",
+                        "passes": 377
+                    }
+                },
+                "name": "PRLOAD-023 ordenación por nombre",
+                "path": "::PRLOAD-023 ordenación por nombre",
+                "id": "a08802a3e0540df04e01c85d4c898d0b",
+                "groups": {}
+            },
+            "PRLOAD-024 ordenación por fecha de creación": {
+                "name": "PRLOAD-024 ordenación por fecha de creación",
+                "path": "::PRLOAD-024 ordenación por fecha de creación",
+                "id": "0641fc5e741850d27d45fa12535e6350",
+                "groups": {},
+                "checks": {
+                        "GET /crm/accounts: status 200": {
+                            "name": "GET /crm/accounts: status 200",
+                            "path": "::PRLOAD-024 ordenación por fecha de creación::GET /crm/accounts: status 200",
+                            "id": "7da92d19f57e240edad09600678f4189",
+                            "passes": 302,
+                            "fails": 75
+                        },
+                        "GET /crm/accounts: sin error de servidor": {
+                            "fails": 0,
+                            "name": "GET /crm/accounts: sin error de servidor",
+                            "path": "::PRLOAD-024 ordenación por fecha de creación::GET /crm/accounts: sin error de servidor",
+                            "id": "56d9dbbdd6896a688bcd03d080c637fd",
+                            "passes": 377
+                        }
+                    }
+            }
+        },
+        "checks": {}
+    }
+}

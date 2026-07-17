@@ -1,0 +1,201 @@
+{
+    "metrics": {
+        "http_req_connecting": {
+            "min": 0,
+            "med": 0,
+            "max": 0.963965,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0.0005803626814952117
+        },
+        "iteration_duration": {
+            "avg": 11130.631297065369,
+            "min": 118.345785,
+            "med": 10772.885007,
+            "max": 37654.156645,
+            "p(90)": 15596.861304400001,
+            "p(95)": 17361.9723989
+        },
+        "data_sent": {
+            "count": 3624351,
+            "rate": 251.4758433610173
+        },
+        "http_req_waiting": {
+            "avg": 3017.739979328854,
+            "min": 0,
+            "med": 2877.1182345,
+            "max": 15177.280671,
+            "p(90)": 4748.6957604,
+            "p(95)": 5428.083072399999
+        },
+        "http_req_duration": {
+            "med": 9771.0539575,
+            "max": 36638.949758,
+            "p(90)": 14594.3780407,
+            "p(95)": 16360.51406855,
+            "avg": 10125.98792950652,
+            "min": 0
+        },
+        "crm_operations": {
+            "count": 6471,
+            "rate": 0.44899077997388853
+        },
+        "http_req_blocked": {
+            "min": 0,
+            "med": 0.006595500000000001,
+            "max": 1.781917,
+            "p(90)": 0.00817,
+            "p(95)": 0.009013049999999998,
+            "avg": 0.007841899752857569
+        },
+        "vus_max": {
+            "value": 5,
+            "min": 5,
+            "max": 5
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 5
+        },
+        "http_req_duration{expected_response:true}": {
+            "min": 10.736356,
+            "med": 9793.358128,
+            "max": 33173.167997,
+            "p(90)": 14590.143087999999,
+            "p(95)": 16330.298958699997,
+            "avg": 10152.62890089575
+        },
+        "crm_error_rate": {
+            "passes": 0,
+            "fails": 6471,
+            "value": 0
+        },
+        "group_duration": {
+            "med": 9772.558264,
+            "max": 36653.86826,
+            "p(90)": 14596.412119,
+            "p(95)": 16361.225256500002,
+            "avg": 10131.463554310309,
+            "min": 0.518514
+        },
+        "http_req_receiving": {
+            "min": 0,
+            "med": 6732.67084,
+            "max": 27046.614445,
+            "p(90)": 10623.323246099999,
+            "p(95)": 11941.493154799995,
+            "avg": 7108.185612012663
+        },
+        "data_received": {
+            "count": 97448874396,
+            "rate": 6761496.8509716485
+        },
+        "iterations": {
+            "count": 6471,
+            "rate": 0.44899077997388853
+        },
+        "http_req_duration{op:write}": {
+            "max": 36638.949758,
+            "p(90)": 14594.581612,
+            "p(95)": 16360.6699505,
+            "avg": 10130.664554907004,
+            "min": 0,
+            "med": 9771.83385,
+            "thresholds": {
+                "p(95)<1000": true,
+                "p(99)<1500": true
+            }
+        },
+        "crm_response_time": {
+            "max": 36638.949758,
+            "p(90)": 14594.581612,
+            "p(95)": 16360.6699505,
+            "avg": 10130.664554907004,
+            "min": 0,
+            "med": 9771.83385
+        },
+        "crm_ttfb": {
+            "med": 2877.144585,
+            "max": 15177.280671,
+            "p(90)": 4748.861535,
+            "p(95)": 5428.491991000001,
+            "avg": 3019.1213459936653,
+            "min": 0
+        },
+        "http_req_failed": {
+            "passes": 30,
+            "fails": 6444,
+            "value": 0.004633920296570899
+        },
+        "http_req_failed{op:write}": {
+            "passes": 30,
+            "fails": 6441,
+            "thresholds": {
+                "rate<0.005": false
+            },
+            "value": 0.004636068613815485
+        },
+        "checks": {
+            "passes": 12912,
+            "fails": 30,
+            "thresholds": {
+                "rate>0.99": false
+            },
+            "value": 0.9976819656930923
+        },
+        "http_reqs": {
+            "count": 6474,
+            "rate": 0.4491989351801815
+        },
+        "http_req_tls_handshaking": {
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0
+        },
+        "http_req_sending": {
+            "avg": 0.06233816496756265,
+            "min": 0,
+            "med": 0.0489975,
+            "max": 34.835502,
+            "p(90)": 0.08146489999999999,
+            "p(95)": 0.10023615
+        }
+    },
+    "setup_data": {
+        "cookie": "better-auth.session_token=3tnr4592xoF7YF9Kp5jCzrWijQ8BDP2R.MURGKBk03tQpEqt3TBztU9x1t4sMnKwtNyJQJxB%2BxpE%3D"
+    },
+    "root_group": {
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {
+            "PRSOAK-002 creación de contacto sostenida": {
+                "name": "PRSOAK-002 creación de contacto sostenida",
+                "path": "::PRSOAK-002 creación de contacto sostenida",
+                "id": "970e3f82b111dcca4ddd2695a9cfa62a",
+                "groups": {},
+                "checks": {
+                        "createContact: status 2xx/3xx": {
+                            "name": "createContact: status 2xx/3xx",
+                            "path": "::PRSOAK-002 creación de contacto sostenida::createContact: status 2xx/3xx",
+                            "id": "2371fc8fb5b0543f79bcefea5d1be5fa",
+                            "passes": 6441,
+                            "fails": 30
+                        },
+                        "createContact: sin error de servidor": {
+                            "id": "cdd3cd014271e7fa6bed5cc55ecc7bbe",
+                            "passes": 6471,
+                            "fails": 0,
+                            "name": "createContact: sin error de servidor",
+                            "path": "::PRSOAK-002 creación de contacto sostenida::createContact: sin error de servidor"
+                        }
+                    }
+            }
+        },
+        "checks": {},
+        "name": "",
+        "path": ""
+    }
+}

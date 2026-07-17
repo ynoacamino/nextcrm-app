@@ -1,0 +1,201 @@
+{
+    "metrics": {
+        "iterations": {
+            "count": 1671,
+            "rate": 1.854926244851966
+        },
+        "data_sent": {
+            "count": 404909,
+            "rate": 449.4771579154786
+        },
+        "crm_ttfb": {
+            "avg": 1739.7283305768988,
+            "min": 74.102542,
+            "med": 1155.900286,
+            "max": 7992.204354,
+            "p(90)": 4183.059617,
+            "p(95)": 4944.3436710000005
+        },
+        "crm_error_rate": {
+            "passes": 0,
+            "fails": 1671,
+            "value": 0
+        },
+        "http_req_duration": {
+            "avg": 7484.371067286751,
+            "min": 35.001129,
+            "med": 8226.525896,
+            "max": 15531.854816,
+            "p(90)": 11028.9155966,
+            "p(95)": 11870.7574492
+        },
+        "data_received": {
+            "count": 5570914765,
+            "rate": 6184102.935626465
+        },
+        "http_req_blocked": {
+            "min": 0.001818,
+            "med": 0.005804,
+            "max": 1.53334,
+            "p(90)": 0.007893,
+            "p(95)": 0.009502899999999995,
+            "avg": 0.014295149940262849
+        },
+        "http_req_receiving": {
+            "avg": 5747.517375740144,
+            "min": 0.70128,
+            "med": 5697.189131,
+            "max": 12504.296169,
+            "p(90)": 9234.488678400001,
+            "p(95)": 10026.04834935
+        },
+        "checks": {
+            "passes": 3342,
+            "fails": 0,
+            "thresholds": {
+                "rate>0.99": false
+            },
+            "value": 1
+        },
+        "http_req_duration{expected_response:true}": {
+            "min": 35.001129,
+            "med": 8226.525896,
+            "max": 15531.854816,
+            "p(90)": 11028.9155966,
+            "p(95)": 11870.7574492,
+            "avg": 7484.371067286751
+        },
+        "http_req_failed": {
+            "passes": 0,
+            "fails": 1674,
+            "value": 0
+        },
+        "crm_response_time": {
+            "avg": 7497.597517022155,
+            "min": 500.423503,
+            "med": 8227.336487,
+            "max": 15531.854816,
+            "p(90)": 11029.132736,
+            "p(95)": 11871.144511
+        },
+        "group_duration": {
+            "avg": 7498.139227585274,
+            "min": 500.877605,
+            "med": 8228.034817,
+            "max": 15532.316234,
+            "p(90)": 11029.645161,
+            "p(95)": 11871.4274555
+        },
+        "http_req_tls_handshaking": {
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0
+        },
+        "http_req_failed{op:read}": {
+            "passes": 0,
+            "fails": 1671,
+            "thresholds": {
+                "rate<0.05": false
+            },
+            "value": 0
+        },
+        "http_reqs": {
+            "count": 1674,
+            "rate": 1.8582564535500845
+        },
+        "http_req_duration{op:read}": {
+            "avg": 7497.597517022155,
+            "min": 500.423503,
+            "med": 8227.336487,
+            "max": 15531.854816,
+            "p(90)": 11029.132736,
+            "p(95)": 11871.144511,
+            "thresholds": {
+                "p(95)<4000": true,
+                "p(99)<8000": true
+            }
+        },
+        "http_req_sending": {
+            "p(95)": 0.05873209999999987,
+            "avg": 0.03734308124253286,
+            "min": 0.008958,
+            "med": 0.03074,
+            "max": 3.058666,
+            "p(90)": 0.04824890000000002
+        },
+        "http_req_waiting": {
+            "avg": 1736.8163484653514,
+            "min": 34.114846,
+            "med": 1154.3049970000002,
+            "max": 7992.204354,
+            "p(90)": 4182.6756704,
+            "p(95)": 4944.184983
+        },
+        "http_req_connecting": {
+            "med": 0,
+            "max": 0.698185,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0.004585506571087217,
+            "min": 0
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 20
+        },
+        "crm_operations": {
+            "count": 1671,
+            "rate": 1.854926244851966
+        },
+        "iteration_duration": {
+            "max": 16033.515024,
+            "p(90)": 11543.6122823,
+            "p(95)": 12371.731615499999,
+            "avg": 7994.361661139352,
+            "min": 354.490653,
+            "med": 8728.143114
+        },
+        "vus_max": {
+            "value": 20,
+            "min": 20,
+            "max": 20
+        }
+    },
+    "setup_data": {
+        "cookie": "better-auth.session_token=VwVRAsB7Abm2p5ggtKvPcCSj2IHxJUNY.MiH0ThhjGEjLGB1WG5uG3wKCVyUgblZFQIT%2BLZH76Ek%3D"
+    },
+    "root_group": {
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {
+            "PRSTRESS-001/007/009 listado bajo saturación": {
+                "id": "07aa59b9bf44d8d948fee76eee5e431a",
+                "groups": {},
+                "checks": {
+                        "GET /crm/accounts: status 200": {
+                            "name": "GET /crm/accounts: status 200",
+                            "path": "::PRSTRESS-001/007/009 listado bajo saturación::GET /crm/accounts: status 200",
+                            "id": "17a79f8e85a0e05d774108b6e01bf728",
+                            "passes": 1671,
+                            "fails": 0
+                        },
+                        "GET /crm/accounts: sin error de servidor": {
+                            "name": "GET /crm/accounts: sin error de servidor",
+                            "path": "::PRSTRESS-001/007/009 listado bajo saturación::GET /crm/accounts: sin error de servidor",
+                            "id": "0eb2c66bceea7913885c94046bc3a0b3",
+                            "passes": 1671,
+                            "fails": 0
+                        }
+                    },
+                "name": "PRSTRESS-001/007/009 listado bajo saturación",
+                "path": "::PRSTRESS-001/007/009 listado bajo saturación"
+            }
+        },
+        "checks": {},
+        "name": ""
+    }
+}
