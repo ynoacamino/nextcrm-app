@@ -111,4 +111,4 @@ jobs:
             kubectl set image deployment/nextcrm \
             nextcrm=ghcr.io/${{ github.repository_owner }}/nextcrm-app:${{ steps.version.outputs.next_version }}
 
-            kubectl rollout status deployment/nextcrm
+            kubectl rollout status deployment nextcrm -n ynoacamino
