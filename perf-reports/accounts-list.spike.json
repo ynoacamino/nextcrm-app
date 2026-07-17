@@ -1,0 +1,201 @@
+{
+    "metrics": {
+        "http_req_duration": {
+            "med": 4445.898388,
+            "max": 23171.862504,
+            "p(90)": 17682.656628,
+            "p(95)": 18222.9125775,
+            "avg": 8586.294985071534,
+            "min": 9.424382
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 20
+        },
+        "group_duration": {
+            "med": 4456.9826004999995,
+            "max": 23172.420709,
+            "p(90)": 17684.4611379,
+            "p(95)": 18223.6920082,
+            "avg": 8625.305212667683,
+            "min": 591.177922
+        },
+        "http_reqs": {
+            "count": 671,
+            "rate": 1.2397913377822771
+        },
+        "http_req_duration{expected_response:true}": {
+            "min": 9.424382,
+            "med": 4445.898388,
+            "max": 23171.862504,
+            "p(90)": 17682.656628,
+            "p(95)": 18222.9125775,
+            "avg": 8586.294985071534
+        },
+        "data_sent": {
+            "count": 154167,
+            "rate": 284.8508363217292
+        },
+        "crm_error_rate": {
+            "fails": 668,
+            "passes": 0,
+            "value": 0
+        },
+        "checks": {
+            "passes": 1336,
+            "fails": 0,
+            "thresholds": {
+                "rate>0.99": false
+            },
+            "value": 1
+        },
+        "http_req_waiting": {
+            "med": 982.724777,
+            "max": 13817.306531,
+            "p(90)": 6638.840639,
+            "p(95)": 8321.996227,
+            "avg": 2148.7169957809238,
+            "min": 8.835413
+        },
+        "crm_operations": {
+            "count": 668,
+            "rate": 1.2342483064658138
+        },
+        "iterations": {
+            "count": 668,
+            "rate": 1.2342483064658138
+        },
+        "http_req_connecting": {
+            "med": 0,
+            "max": 0.935335,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0.011984538002980626,
+            "min": 0
+        },
+        "http_req_sending": {
+            "avg": 0.040989929955290605,
+            "min": 0.010357,
+            "med": 0.035244,
+            "max": 0.375429,
+            "p(90)": 0.055872,
+            "p(95)": 0.073068
+        },
+        "http_req_receiving": {
+            "min": 0.121919,
+            "med": 3614.137964,
+            "max": 20338.779655,
+            "p(90)": 14683.458581,
+            "p(95)": 15601.150276,
+            "avg": 6437.536999360651
+        },
+        "http_req_failed{op:read}": {
+            "passes": 0,
+            "fails": 668,
+            "thresholds": {
+                "rate<0.02": false
+            },
+            "value": 0
+        },
+        "http_req_tls_handshaking": {
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0
+        },
+        "crm_ttfb": {
+            "avg": 2158.2356997125744,
+            "min": 136.108233,
+            "med": 986.306947,
+            "max": 13817.306531,
+            "p(90)": 6699.762953300014,
+            "p(95)": 8322.984313899999
+        },
+        "data_received": {
+            "count": 2905424147,
+            "rate": 5368285.678143161
+        },
+        "vus_max": {
+            "value": 20,
+            "min": 20,
+            "max": 20
+        },
+        "crm_response_time": {
+            "med": 4454.931971,
+            "max": 23171.862504,
+            "p(90)": 17684.0872437,
+            "p(95)": 18223.26036585,
+            "avg": 8624.723351517963,
+            "min": 590.741818
+        },
+        "http_req_failed": {
+            "passes": 0,
+            "fails": 671,
+            "value": 0
+        },
+        "http_req_blocked": {
+            "p(90)": 0.008557,
+            "p(95)": 0.0172935,
+            "avg": 0.02282484202682564,
+            "min": 0.002574,
+            "med": 0.006544,
+            "max": 1.374893
+        },
+        "http_req_duration{op:read}": {
+            "p(90)": 17684.0872437,
+            "p(95)": 18223.26036585,
+            "avg": 8624.723351517963,
+            "min": 590.741818,
+            "med": 4454.931971,
+            "max": 23171.862504,
+            "thresholds": {
+                "p(95)<2000": true,
+                "p(99)<3000": true
+            }
+        },
+        "iteration_duration": {
+            "avg": 9112.744674974587,
+            "min": 90.986368,
+            "med": 4954.25247,
+            "max": 23672.863047,
+            "p(90)": 18184.3197216,
+            "p(95)": 18724.9458312
+        }
+    },
+    "setup_data": {
+        "cookie": "better-auth.session_token=QkkDhHOS03P4VybgePToDhEyUvJihZ1F.sqsg8kLwg48w6Mvtb2efGFYzg3cpTMJEoEUrUyTiA7A%3D"
+    },
+    "root_group": {
+        "groups": {
+            "PRSPIKE-001/005/007 listado de cuentas durante pico": {
+                "name": "PRSPIKE-001/005/007 listado de cuentas durante pico",
+                "path": "::PRSPIKE-001/005/007 listado de cuentas durante pico",
+                "id": "fa0154abd42b420457c229ad1ba20bb3",
+                "groups": {},
+                "checks": {
+                        "GET /crm/accounts: status 200": {
+                            "name": "GET /crm/accounts: status 200",
+                            "path": "::PRSPIKE-001/005/007 listado de cuentas durante pico::GET /crm/accounts: status 200",
+                            "id": "05ceac11d28f9e3b98ed041b11da522c",
+                            "passes": 668,
+                            "fails": 0
+                        },
+                        "GET /crm/accounts: sin error de servidor": {
+                            "path": "::PRSPIKE-001/005/007 listado de cuentas durante pico::GET /crm/accounts: sin error de servidor",
+                            "id": "d005c33e046b36e21534ce638c217334",
+                            "passes": 668,
+                            "fails": 0,
+                            "name": "GET /crm/accounts: sin error de servidor"
+                        }
+                    }
+            }
+        },
+        "checks": {},
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e"
+    }
+}

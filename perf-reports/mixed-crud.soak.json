@@ -1,0 +1,265 @@
+{
+    "metrics": {
+        "group_duration": {
+            "med": 14329.558024999998,
+            "max": 1115712.586632,
+            "p(90)": 21938.294857400004,
+            "p(95)": 26475.47363184993,
+            "avg": 16335.937952525725,
+            "min": 0.421732
+        },
+        "http_req_duration{op:read}": {
+            "med": 12922.400061,
+            "max": 1078665.453062,
+            "p(90)": 18432.058600000008,
+            "p(95)": 22175.910160899995,
+            "avg": 13728.247653094271,
+            "min": 0,
+            "thresholds": {
+                "p(99)<1500": true,
+                "p(95)<1000": true
+            }
+        },
+        "data_received": {
+            "count": 63286533778,
+            "rate": 4385704.289550617
+        },
+        "http_req_failed": {
+            "passes": 327,
+            "fails": 4000,
+            "value": 0.07557198983129189
+        },
+        "http_req_sending": {
+            "min": 0,
+            "med": 0.043671,
+            "max": 13362.418981,
+            "p(90)": 0.0994922,
+            "p(95)": 0.16829979999999958,
+            "avg": 30.258885992373433
+        },
+        "http_req_blocked": {
+            "p(90)": 0.010023600000000002,
+            "p(95)": 0.01734709999999997,
+            "avg": 0.7040042562976676,
+            "min": 0,
+            "med": 0.007382,
+            "max": 400.517789
+        },
+        "http_req_duration{op:write}": {
+            "p(95)": 30908.947143849993,
+            "avg": 20797.450397086082,
+            "min": 0,
+            "med": 18010.5606285,
+            "max": 1099231.330485,
+            "p(90)": 25595.485285,
+            "thresholds": {
+                "p(95)<1000": true,
+                "p(99)<1500": true
+            }
+        },
+        "vus": {
+            "max": 5,
+            "value": 2,
+            "min": 2
+        },
+        "http_req_receiving": {
+            "avg": 12571.27566469933,
+            "min": 0,
+            "med": 11097.920814,
+            "max": 1085882.358258,
+            "p(90)": 17101.8814384,
+            "p(95)": 20654.000373999992
+        },
+        "crm_operations": {
+            "rate": 0.29964961289457065,
+            "count": 4324
+        },
+        "iterations": {
+            "count": 1440,
+            "rate": 0.09979080540429736
+        },
+        "checks": {
+            "passes": 8321,
+            "fails": 327,
+            "thresholds": {
+                "rate>0.99": true
+            },
+            "value": 0.9621877890841813
+        },
+        "http_req_failed{op:read}": {
+            "passes": 203,
+            "fails": 2681,
+            "thresholds": {
+                "rate<0.005": true
+            },
+            "value": 0.0703883495145631
+        },
+        "iteration_duration": {
+            "max": 1205811.803712,
+            "p(90)": 63316.832296,
+            "p(95)": 74104.556441,
+            "avg": 49974.576642560685,
+            "min": 176.1378,
+            "med": 45236.350589
+        },
+        "http_reqs": {
+            "count": 4327,
+            "rate": 0.29985751040582964
+        },
+        "http_req_failed{op:write}": {
+            "passes": 124,
+            "fails": 1316,
+            "thresholds": {
+                "rate<0.005": true
+            },
+            "value": 0.08611111111111111
+        },
+        "http_req_tls_handshaking": {
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "crm_ttfb": {
+            "avg": 3472.1916596389888,
+            "min": 0,
+            "med": 3064.3043585,
+            "max": 37017.113828,
+            "p(90)": 6543.216896900001,
+            "p(95)": 7912.298230249996
+        },
+        "http_req_duration{expected_response:true}": {
+            "med": 14641.3361445,
+            "max": 59321.956592,
+            "p(90)": 21861.059851599995,
+            "p(95)": 25739.767856899995,
+            "avg": 15807.647709107505,
+            "min": 22.904452
+        },
+        "crm_response_time": {
+            "avg": 16082.468733424608,
+            "min": 0,
+            "med": 14329.003971999999,
+            "max": 1099231.330485,
+            "p(90)": 21937.278796300005,
+            "p(95)": 26474.947301749933
+        },
+        "crm_error_rate": {
+            "passes": 0,
+            "fails": 4324,
+            "value": 0
+        },
+        "http_req_connecting": {
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0.05694727224404898,
+            "min": 0,
+            "med": 0,
+            "max": 102.819797
+        },
+        "http_req_waiting": {
+            "max": 37017.113828,
+            "p(90)": 6542.3549588000005,
+            "p(95)": 7911.167940499999,
+            "avg": 3469.824014101915,
+            "min": 0,
+            "med": 3063.794597
+        },
+        "http_req_duration": {
+            "avg": 16071.358564793627,
+            "min": 0,
+            "med": 14325.569911,
+            "max": 1099231.330485,
+            "p(90)": 21932.7755236,
+            "p(95)": 26456.08184449998
+        },
+        "data_sent": {
+            "count": 1411555,
+            "rate": 97.81959050171038
+        },
+        "vus_max": {
+            "value": 5,
+            "min": 5,
+            "max": 5
+        }
+    },
+    "setup_data": {
+        "cookie": "better-auth.session_token=rTiqBmFreEXpoyRoLXXa9Cnxy0zvhFT4.uR5ay9w1J5VFwpbJion3sCjQvvvIN5TgVC3RvSOH0EM%3D"
+    },
+    "root_group": {
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {
+            "PRSOAK-003/004/005 lectura sostenida (accounts)": {
+                "name": "PRSOAK-003/004/005 lectura sostenida (accounts)",
+                "path": "::PRSOAK-003/004/005 lectura sostenida (accounts)",
+                "id": "a830e0623ca662568ea982c59a7c42de",
+                "groups": {},
+                "checks": {
+                        "GET /crm/accounts: status 200": {
+                            "path": "::PRSOAK-003/004/005 lectura sostenida (accounts)::GET /crm/accounts: status 200",
+                            "id": "2de5b690bc501bfb32a22d56f9754bc4",
+                            "passes": 1343,
+                            "fails": 99,
+                            "name": "GET /crm/accounts: status 200"
+                        },
+                        "GET /crm/accounts: sin error de servidor": {
+                            "name": "GET /crm/accounts: sin error de servidor",
+                            "path": "::PRSOAK-003/004/005 lectura sostenida (accounts)::GET /crm/accounts: sin error de servidor",
+                            "id": "5c98aa3632728c30ce37322a29f8da66",
+                            "passes": 1442,
+                            "fails": 0
+                        }
+                    }
+            },
+            "PRSOAK-003/004/005 lectura agregada (dashboard)": {
+                "checks": {
+                    "GET /crm/dashboard: status 200": {
+                        "id": "c2165d96b0b61ff8a525ae15d1f71201",
+                        "passes": 1338,
+                        "fails": 104,
+                        "name": "GET /crm/dashboard: status 200",
+                        "path": "::PRSOAK-003/004/005 lectura agregada (dashboard)::GET /crm/dashboard: status 200"
+                    },
+                    "GET /crm/dashboard: sin error de servidor": {
+                        "name": "GET /crm/dashboard: sin error de servidor",
+                        "path": "::PRSOAK-003/004/005 lectura agregada (dashboard)::GET /crm/dashboard: sin error de servidor",
+                        "id": "0153ce79952b78f6a35f4d87240d8b93",
+                        "passes": 1442,
+                        "fails": 0
+                    }
+                },
+                "name": "PRSOAK-003/004/005 lectura agregada (dashboard)",
+                "path": "::PRSOAK-003/004/005 lectura agregada (dashboard)",
+                "id": "ab3abb6e4e8d8b07d262b1223faeb801",
+                "groups": {}
+            },
+            "PRSOAK-003/004/005 escritura sostenida (createContact)": {
+                "id": "2f3835e41de55186dca52b668fa7c878",
+                "groups": {},
+                "checks": {
+                        "createContact: status 2xx/3xx": {
+                            "path": "::PRSOAK-003/004/005 escritura sostenida (createContact)::createContact: status 2xx/3xx",
+                            "id": "2661fd9784769493225766194a6fb52a",
+                            "passes": 1316,
+                            "fails": 124,
+                            "name": "createContact: status 2xx/3xx"
+                        },
+                        "createContact: sin error de servidor": {
+                            "name": "createContact: sin error de servidor",
+                            "path": "::PRSOAK-003/004/005 escritura sostenida (createContact)::createContact: sin error de servidor",
+                            "id": "f26ddeb15ddd2fb1811c6343f640b924",
+                            "passes": 1440,
+                            "fails": 0
+                        }
+                    },
+                "name": "PRSOAK-003/004/005 escritura sostenida (createContact)",
+                "path": "::PRSOAK-003/004/005 escritura sostenida (createContact)"
+            }
+        },
+        "checks": {},
+        "name": "",
+        "path": ""
+    }
+}
